@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2023-02-10T14:54:14-05:00",
+  "id": "flutterweb-codelab1",
+  "duration": 0,
+  "title": "Flutter Web Codelab (pt. 1) - Introduction to Flutter Web",
+  "summary": "Flutter Web Codelab",
+  "source": "flutterweb_codelab1.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "markdown"
+  ],
+  "tags": [
+    "web"
+  ],
+  "feedback": "https://github.com/romanejaquez/flutter-forward-codelab1",
+  "url": "flutterweb-codelab1"
+}

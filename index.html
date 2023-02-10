@@ -1,0 +1,1651 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Flutter Web Codelab (pt. 1) - Introduction to Flutter Web</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements-tmp/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="flutterweb-codelab1"
+                  title="Flutter Web Codelab (pt. 1) - Introduction to Flutter Web"
+                  environment="web"
+                  feedback-link="https://github.com/romanejaquez/flutter-forward-codelab1">
+    
+      <google-codelab-step label="Overview" duration="0">
+        <p>Welcome to the exciting world of Flutter Web!</p>
+<p><strong>Flutter</strong> is an open-source UI Toolkit supported by Google for building beautiful, natively-compiled user interfaces in a multi-platform fashion, using <strong>Dart</strong>, another open-source programming language supported by Google, as its language.</p>
+<p><strong>Flutter for Web</strong> provides the lowest barrier to entry when it comes to becoming a profilic Flutter developer. Most of the concepts learned in Flutter can be applied in a multi-platform scenario, and web is not an exception, so join us in building compelling web apps by going through the codelabs in this series.</p>
+<h2 is-upgraded>NOTE: THIS IS NOT A BEGINNER CODELAB</h2>
+<p>(If you&#39;re looking for more beginner content, please visit some of my other codelabs <a href="https://romanjustcodes.web.app/#/workshops" target="_blank">here</a>). If you&#39;re up for the challenge, then proceed.</p>
+<p>This is a codelab series focused on Flutter Web, in which you&#39;ll learn the following:</p>
+<ul>
+<li>Building Layouts in Flutter</li>
+<li>Adding Custom Fonts</li>
+<li>Page Navigation</li>
+<li>Nested Navigation</li>
+<li>Responsive Design</li>
+<li>State Management using Provider</li>
+<li>Persisting state in Local Storage</li>
+<li>Theming your Web Apps</li>
+</ul>
+<p>The following screenshots depict what we&#39;ll be building throughout this series:</p>
+<ul>
+<li>A Flutter Web App for your own Personal Portfolio</li>
+<li>Shows a brief profile information</li>
+<li>Contains pages for the major social media platforms and professional content portals (Twitter, LinkedIn, Github) and for showcasing your web presence</li>
+<li>Contains a light and a dark theme</li>
+<li>Contains a custom side navigation rail (on tablet and desktop) and an expandable menu for mobile</li>
+<li>Adjusts to the size of the screen in which it renders using responsive design</li>
+<li>Stores the last selected option</li>
+</ul>
+<p>Are you ready??? Hit <strong>Next</strong> to proceed.</p>
+<p class="image-container"><img alt="App" src="img/6a4bdab07fa5e45e.gif"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/b45aac38ce3ab982.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/be8fa8f860291324.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/e2b81c6cabe6e35.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/1ebaeeda50025253.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/eaa5613e6b06c1b0.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/91ff1872e0ef7d17.png"></p>
+<p class="image-container"><img alt="Design Mockup" src="img/6f2d63a5406d7d33.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pre-requisites" duration="0">
+        <h2 is-upgraded>Knowlege requirements</h2>
+<ul>
+<li>Basic knowledge in <strong>Flutter</strong> is a plus, but not required. Programming knowledge required, on any object-oriented language a plus.</li>
+</ul>
+<h2 is-upgraded>Tool / Software requirements</h2>
+<ul>
+<li>Install the <a href="https://docs.flutter.dev/get-started/install?gclid=CjwKCAiAioifBhAXEiwApzCzts2khKe1zCKO5csnFpo2bsLCh4tSVC9tFDCsklHdHFgtYghH-misTxoCeOAQAvD_BwE&gclsrc=aw.ds" target="_blank">Flutter SDK</a></li>
+<li>Install <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a></li>
+<li>Have the <a href="https://nodejs.org/en/download/" target="_blank">NPM Package Manager</a> installed (for installing the Firebase CLI tools later on)</li>
+<li>Have <a href="https://www.google.com/chrome/?brand=CHBD&brand=CHBD&gclid=CjwKCAiAioifBhAXEiwApzCztmHjCMFWK_6s7iBH1A7OaEXb4SBoTx6VFcmJnF7_IkXIO_jx7nEI0xoC79wQAvD_BwE&gclsrc=aw.ds" target="_blank"><strong>Chrome</strong></a> browser installed</li>
+</ul>
+<h2 is-upgraded>Optional: DartPad</h2>
+<p>For learning throughou this series, you could follow along using <a href="https://dartpad.dev/" target="_blank">DartPad</a> for web if you choose so. But for best developer experience and for deploying to Firebase you will need to have VS Code at a minimum.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the Project" duration="0">
+        <h2 is-upgraded>IF USING DARTPAD, SKIP THE FOLLOWING STEP</h2>
+<p>Once <strong>Flutter</strong> is installed on your machine, let&#39;s create your first Flutter project. Navigate to the folder in which this project will live.</p>
+<p>Once inside the folder, from a terminal or from VS Code&#39;s terminal, execute the command <strong>flutter create PROJECT_NAME</strong>, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">flutter create PROJECT_NAME
+
+</code></pre>
+<p>This will instruct the framework to generate a startup Flutter project with all the minimum requirements to start up.</p>
+<p>You will have a folder named <strong>PROJECT_NAME</strong> or whatever name you pick (in my case I&#39;ll call it <strong>roman_web_portfolio</strong>); make sure to navigate inside this folder; the rest of the steps will depend on you being at the root of your project. You can do <code>cd PROJECT_NAME</code> or re-open VSCode with this folder as the root of your environment.</p>
+<p>From the generated files, navigate to the <strong>main.dart</strong> file. There&#39;s a bunch of boilerplate code; for now let&#39;s just test that things are running fine.</p>
+<p>Go ahead and execute the command <code>flutter run -d chrome</code> at the root of your project. This will instruct Flutter to run your project, using <strong>Chrome</strong> browser as your target device (hence the <code>-d</code> flag):</p>
+<pre><code language="language-flutter" class="language-flutter">flutter run -d chrome
+
+</code></pre>
+<p>Make sure you can see the default counter sample app:</p>
+<p class="image-container"><img alt="App" src="img/1237ecdb5105b673.png"></p>
+<p>Looking good! Click on the floating button and check that the counter in the middle of the screen goes up, just as a sanity check. If so, your project is set up, Flutter is running well - ready for the next step! Hit <strong>Next</strong> when ready.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create the Project Structure" duration="0">
+        <p>Good organization on your project goes a long way, so let&#39;s start by setting the foundation of this project, starting by a folder structure that makes sense for this web app. I&#39;ll follow this convention although this is a small web app, but can grow later:</p>
+<ul>
+<li>At the root of the project (inside <strong>roman_web_portfolio</strong>) a new folder called <strong>assets</strong> with the following subfolders: <ul>
+<li>images: for my image assets</li>
+<li>fonts: for my custom fonts and icon fonts</li>
+</ul>
+</li>
+<li>Inside the *<em>lib</em> folder, at the same level as my <strong>main.dart</strong> file: <ul>
+<li>pages: a folder for all my pages</li>
+<li>widgets: a folder for common widgets used throughout the app</li>
+<li>models: a folder for my <strong>PODO</strong> (plain ol&#39; Dart object) classes</li>
+<li>helpers: for utility classes, helper methods, enums, etc.</li>
+<li>services: I&#39;ll be using the <strong>provider</strong> package as my state management strategy, so I&#39;ll provide services this way; this is where they will live</li>
+<li>routes: for my application routes</li>
+</ul>
+</li>
+</ul>
+<p>Confirm that your project structure looks like this and proceed to the next step.</p>
+<p class="image-container"><img alt="App" src="img/e8e2c492e409a0fd.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create your First Page" duration="0">
+        <p>Let&#39;s start building some confidence before we get deeper. Let&#39;s create our first page, which will be a splash screen, where we&#39;ll simulate a delay before proceeding further into the app.</p>
+<p>Inside the <strong>pages</strong> folder, add a new file called <strong>splash_page.dart</strong>. Add the following contents:</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+
+</code></pre>
+<p>Replace the returned <strong>Container</strong> with a <strong>Scaffold</strong> widget, containing a <strong>Text</strong> widget wrapped inside a <strong>Center</strong> widget. Add any text you want:</p>
+<pre><code language="language-flutter" class="language-flutter">// ... inside the build method:
+
+return const Scaffold(
+    body: Center(
+    child: Text(&#39;Hello Flutter!&#39;)
+    )
+);
+
+</code></pre>
+<p>Save that. Go back to the <strong>main.dart</strong> file; delete all content inside of it. We&#39;ll start from scratch building our app.</p>
+<p>Add the required <strong>import</strong> of the <strong>Material</strong> library, as wel as the customary <strong>main</strong> method.</p>
+<p>Inside it, call the <strong>runApp</strong> method, passing it a newly created widget called <strong>PortfolioApp</strong> as the root of our application (doesn&#39;t exist yet - we&#39;ll create it in an moment):</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+
+void main() {
+  runApp(const PortfolioApp());
+}
+
+</code></pre>
+<p>Right under this code, create the corresponding class to create a custom widget that inherits <strong>StatelessWidget</strong> called <strong>PortfolioApp</strong>. This custom widget will override its <strong>build</strong> method as always, and wrap the main <strong>MaterialApp</strong> widget - the foundation of our material-styled app, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">class PortfolioApp extends StatelessWidget {
+  const PortfolioApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: &#39;Portfolio App&#39;,
+      debugShowCheckedModeBanner: false,
+      home: SplashPage()
+    );
+  }
+}
+
+</code></pre>
+<p>Notice we&#39;re introducing our <strong>SplashPage</strong> widget created earlier; import it now so the app doesn&#39;t start barking.</p>
+<pre><code language="language-flutter" class="language-flutter">// at the top of the file, under the material import
+// add the corresponding import pertaining to your project 
+import &#39;package:flutter/material.dart&#39;;
+import &#39;package:roman_web_portfolio/pages/splash_page.dart&#39;;
+
+</code></pre>
+<p>So to recap, we created a <strong>SplashPage</strong> custom widget as a page, and we&#39;ve assigned it as the <strong>home</strong> property of our <strong>MaterialApp</strong> widget.</p>
+<p>Let&#39;s run what we have by calling <code>flutter run -d chrome</code> or if you still left the app running from before, just do a hot reload (hit ‘R&#39; on the command line, or Shift-R - both work the same on the web).</p>
+<p class="image-container"><img alt="App" src="img/3eb874603a20b889.png"></p>
+<p>Doesn&#39;t look like much, but we&#39;ve created our first page - we are on a roll!</p>
+<p>With that in place, let&#39;s finish bringing some other complementary pieces to our app, such as the fonts and color definitions we&#39;ll use throughout.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installing Custom Fonts" duration="0">
+        <p>We&#39;ll be using our own custom font throughout the app as opposed to the ones that come out of the box, as well as install our own icon font - a way to display vector-based images from a font file.</p>
+<p><a href="https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fflutterweb_fonts.zip?alt=media&token=e9782732-639d-4519-b05b-ad61d8d20406" target="_blank"><strong>Download</strong></a> these font files (Product Sans family) and add the <strong>Product Sans .ttf</strong> fonts inside the <strong>assets/fonts</strong> folder we created earlier.</p>
+<p>Your structure should look like this:</p>
+<p class="image-container"><img alt="App" src="img/c23f3d4c672a8c01.png"></p>
+<h2 is-upgraded>Configure the fonts on the app</h2>
+<p>Navigate to the <strong>pubspec.yaml</strong> and paste the following config section at the root of the indentation (also you can find a commented section that can guide you on that) - make sure the indentations are correct!:</p>
+<pre><code language="language-yaml" class="language-yaml">fonts:
+    - family: Product Sans
+      fonts:
+        - asset: assets/fonts/Product Sans Regular.ttf
+        - asset: assets/fonts/Product Sans Bold.ttf
+          weight: 900
+        - asset: assets/fonts/Product Sans Italic.ttf
+          style: italic
+
+</code></pre>
+<p class="image-container"><img alt="App" src="img/f937fee979844b6e.png"></p>
+<p>Notice how we defined the font family as <strong>Product Sans</strong> - we&#39;ll use that name in a minute.</p>
+<p>Rebuild the app by shutting it down and restarting it again so it picks up the newly added files.</p>
+<h2 is-upgraded>Apply the font family to the app</h2>
+<p>With the fonts imported, let&#39;s apply them to the app. Navigate to the <strong>main.dart</strong>, and inside our <strong>MaterialApp</strong> widget, set its <strong>theme</strong> property to a <strong>ThemeData</strong> instance, with its <strong>fontFamily</strong> property set to the number we defined our font to be (&#34;Product Sans&#34;). The new updated <strong>MaterialApp</strong> widget will look like this:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. rest of the code
+
+return MaterialApp(
+    title: &#39;Portfolio App&#39;,
+    theme: ThemeData(
+        fontFamily: &#39;Product Sans&#39;,
+    ),
+    debugShowCheckedModeBanner: false,
+    home: const SplashPage()
+);
+
+</code></pre>
+<p>Run the app again (<code>flutter run -d chrome</code>) and check the fonts got applied:</p>
+<p class="image-container"><img alt="App" src="img/aa47718eeef0078f.png"></p>
+<p>Great. Now let&#39;s install the icon fonts, which will pretty much follow the same procedure.</p>
+<p><a href="https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fflutterweb_fonts.zip?alt=media&token=e9782732-639d-4519-b05b-ad61d8d20406" target="_blank"><strong>Download</strong></a> these fonts which were created using (fluttericon)[https://www.fluttericon.com/] but you can use any icon-generating tool that generates a TTF with your icons. The cool thing about <strong>FlutterIcon</strong> is that it generates a <strong>.dart</strong> file already setup with corresponding Dart properties mapped to each of the icon fonts on your file.</p>
+<p>In this package you&#39;ll get a few files that we&#39;ll use for this app:</p>
+<ul>
+<li>A <strong>.ttf</strong> file called <strong>PersonalPortfolioIcons.ttf</strong> corresponding to the font itself</li>
+<li>A <strong>.dart</strong> class, called <strong>personal_portfolio_icons_icons.dart</strong> with the font mappings.</li>
+</ul>
+<p>Drag the <strong>.ttf</strong> files inside the <strong>assets/fonts</strong> folder and the <strong>.dart</strong> file in the <strong>helpers</strong> folder, as such:</p>
+<p class="image-container"><img alt="App" src="img/aa47718eeef0078f.png"></p>
+<p>Back on the <strong>pubspec.yaml</strong> file, add an entry to the newly imported font, above or below the exising configuration for Product Sans:</p>
+<pre><code language="language-flutter" class="language-flutter">//... under fonts...
+
+  fonts:
+    - family: PersonalPortfolioIcons
+      fonts:
+        - asset: assets/fonts/PersonalPortfolioIcons.ttf
+
+</code></pre>
+<p class="image-container"><img alt="App" src="img/cc24a508ddea43fd.png"></p>
+<p>Keep this exact configuration so it can work.</p>
+<p>Rebuild the app by restarting and launching it again for the font changes to take effect.</p>
+<p>Let&#39;s test that the icon fonts are functional. In the <strong>SplashPage</strong> widget, replace the <strong>Text</strong> widget by an <strong>Icon</strong> widget, adding one of the existing icon mappings, as such:</p>
+<p class="image-container"><img alt="App" src="img/8d24def53a33673d.png"></p>
+<p>And we&#39;re all set to continue. Hit <strong>Next</strong> to proceed.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the Navigation Strategy" duration="0">
+        <p>The navigation strategy for this app will be as follows:</p>
+<ul>
+<li>a root navigation for the splash screen and the main screen, and an error page (for erroneous pages)</li>
+<li>a nested navigation within main to allow users to navigate between the many sections available</li>
+<li>a navigation rail will be created that will allow users to select the nested page to go to</li>
+<li>an error page</li>
+</ul>
+<p class="image-container"><img alt="App" src="img/8c3568c3a24a0314.png"></p>
+<p>The package we&#39;ll use is <a href="https://pub.dev/packages/go_router" target="_blank">Go_Router</a> supported by the Flutter team at Google, which is a declarative routing package for Flutter that uses the Router API to provide a convenient, url-based API for navigating between different screens. You can define URL patterns, navigate using a URL, handle deep links, and a number of other navigation-related scenarios.</p>
+<p>Following that declarative aspect, we&#39;ll go ahead and create a file that will encapsulate the routes.</p>
+<p>Start by creating a utilities class that will hold some unique keys that our navigation will require so we can refer to it programmamtically throughout the app.</p>
+<p>Create a file called <strong>Utils</strong> in the <strong>helpers</strong> folder. This class will contain three important <strong>Global</strong> keys. <a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html#:~:text=Global%20keys%20provide%20access%20to,another%20location%20in%20the%20tree." target="_blank">Global keys</a> are used to uniquely identify elements in the widget tree, whcih provide you access to their state, therefore we&#39;ll use them to refer to the navigation and the main scaffold on this app.</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class Utils {
+
+  static GlobalKey&lt;NavigatorState&gt; mainNav = GlobalKey();
+  static GlobalKey&lt;NavigatorState&gt; tabNav = GlobalKey();
+  static GlobalKey&lt;ScaffoldState&gt; mainScaffold = GlobalKey();
+}
+
+</code></pre>
+<p>Import the <strong>go_router</strong> package into your app via the <code>flutter pub add go_router</code>, which fetches it from *<strong>pub.dev</strong> and installs it onto your app. Execute the following command:</p>
+<pre><code language="language-flutter" class="language-flutter">flutter pub add go_router
+
+</code></pre>
+<p>Create a file called <strong>app_routes.dart</strong> inside the <strong>routes</strong> folder, and add the initial configuration for our application navigation route strategy, as follows:</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:go_router/go_router.dart&#39;;
+import &#39;package:roman_web_portfolio/helpers/utils.dart&#39;;
+import &#39;package:roman_web_portfolio/pages/splash_page.dart&#39;;
+
+class AppRoutes {
+
+  static final router = GoRouter(
+    initialLocation: &#39;/&#39;,
+    navigatorKey: Utils.mainNav,
+    routes: [
+      GoRoute(
+        parentNavigatorKey: Utils.mainNav,
+        path: &#39;/&#39;,
+        builder: (context, state) =&gt; const SplashPage(),
+      )
+    ]
+  );
+}
+
+</code></pre>
+<p>Let&#39;s dissect this code.</p>
+<p>We create a <strong>static</strong> final instance of <strong>GoRouter</strong>, and pass the following initialization arguments:</p>
+<ul>
+<li>initialLocation: the initial location from where the app should launch; in this case, the root of the web app (&#39;/&#39;)</li>
+<li>navigatorKey: refers to the previously created <strong>Global</strong> key called <strong>mainNav</strong> for us to refer to the root navigation programmaticaly throughout our app</li>
+<li>routes: an array containing the many routes our app will be able to navigate the users to. For now, we&#39;ve created our first route, an instance of <strong>GoRoute</strong> with the following arguments: <ul>
+<li>parentNavigatorKey: the key corresponding to the parent navigation key (in our case, the same <strong>mainNav</strong>)</li>
+<li>path: the path that will resolve when users invoke a particular page. In our case, if the user doesn&#39;t put anything, it will return this page by default.</li>
+<li>builder: the builder method that will render the corresponding page widget to be returned upon the user invoking this route / path. In our case, the <strong>SplashPage</strong> will return, therefore when a request for this route is received, this method builds a widget and returns it.</li>
+</ul>
+</li>
+</ul>
+<p>Every page that needs to be navigated to <strong>MUST</strong> have a <strong>GoRoute</strong> route instance inside the <strong>routes</strong> array for this to work.</p>
+<h2 is-upgraded>Integrate the GoRouter navigation into our app.</h2>
+<p>Let&#39;s do some refactoring to integrate GoRouter to the app.</p>
+<p>Back on the <strong>main.dart</strong> file, refactor the <strong>MaterialApp</strong> widget and replace the default constructor by the <strong>MaterialApp.router</strong> constructor. Remove the <strong>home</strong> parameter since we won&#39;t be hardcoding the home page, but be fed by the router configuration available in the <strong>AppRoutes.router</strong> instance created earlier, and add the following parameters to it. Make sure to import the <strong>AppRoutes</strong> class:</p>
+<pre><code language="language-flutter" class="language-flutter">//... rest of the code
+
+// This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      title: &#39;Portfolio App&#39;,
+      theme: ThemeData(
+        fontFamily: &#39;Product Sans&#39;,
+      ),
+      debugShowCheckedModeBanner: false,
+      routeInformationProvider: AppRoutes.router.routeInformationProvider,
+      routeInformationParser: AppRoutes.router.routeInformationParser,
+      routerDelegate: AppRoutes.router.routerDelegate,
+    );
+  }
+
+//...
+
+</code></pre>
+<p>Notice the <strong>routeInformationProvider</strong>, <strong>routeInformationParser</strong>, and the <strong>routerDelegate</strong> are the hooks required to be added at the <strong>MaterialApp</strong> level to incorporate the navigation at the root level.</p>
+<p>Test that the navigation integration was successful by just running the app again (<code>flutter run -d chrome</code>) and you should see the same splash page, but now being served by the <strong>go_router</strong> implementation. Nice!</p>
+<p class="image-container"><img alt="App" src="img/c784a94421dae941.png"></p>
+<p>Let&#39;s do some refactoring. You notice a few things hardcoded in the <strong>routes</strong> configuration, such as the name of the route, etc. Let&#39;s change that. Every page should be able to feed its own route name for better control and management.</p>
+<p>Go to the <strong>SplashPage</strong> class and create a <strong>static const String</strong> field called <strong>route</strong>. Name it to what will correspond to the url path people will type to navigate to the corresponding page. We&#39;ll name this <code>"/splash"</code>. You will do this for every single page class you create moving forward.</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the SplashPage class
+
+static const String route = &#39;/splash&#39;;
+
+
+</code></pre>
+<p>Make it look like this:</p>
+<p class="image-container"><img alt="App" src="img/15c092ad12873d5d.png"></p>
+<p>Go back to the <strong>AppRoutes</strong> class, and in the GoRouter configuration, replace the <strong>initialLocation</strong> value by <strong>SplashPage.route</strong>, and the <strong>path</strong> property on the first route by <strong>SplashPage.route</strong> as well. It should look as follows:</p>
+<p class="image-container"><img alt="App" src="img/252b138af0828e80.png"></p>
+<p>If you test it again, there should be no change. And with that, routing is configured in your application. We&#39;ll come back to this file to add the rest of the routes, and we&#39;ll learn about nested navigations with <strong>ShellRoute</strong> later.</p>
+<p>Hit <strong>Next</strong> to continue.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create the Splash Page (cont.)" duration="0">
+        <p>We created earlier the placeholder for the Splash page, but this time we&#39;ll fully develop it.</p>
+<p>This is what we&#39;ll shoot for (see below). This will be an intermediate page with a fake delay simulating some processing being done, then it should proceed to the next page (the main section) of the app.</p>
+<p class="image-container"><img alt="App" src="img/63fb8c280d4a315b.png"></p>
+<p>The following is the schematics of this app and how we&#39;ll tackle it in Flutter:</p>
+<p class="image-container"><img alt="App" src="img/973ec70b90fe2e03.png"></p>
+<h2 is-upgraded>Add Color definitions for this app</h2>
+<p>Before we start, let&#39;s add some foundational elements we&#39;ll need for this app, such as color definitions.</p>
+<h3 is-upgraded>Add Colors</h3>
+<p>Add a file called <strong>colors.dart</strong> inside the <strong>helpers</strong> folder and a class with the name <strong>PersonalPortfolioColors</strong>, which will be a list of colors we&#39;ll use throughout our app. Feel free to change it to yours. Some of these will be the foundation of the <strong>theming</strong> we&#39;ll be implementing later. Grab the content from the snippet below:</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class PersonalPortfolioColors {
+
+  // for the dark theme
+  static const Color mainBlue = Color(0xFF51BFD7);
+  static const Color secondaryBlue = Color(0XFF1E6B7C);
+  static const Color lightBlue = Color(0xFF5DD1EB);
+  static const Color textColor = Colors.white;
+  static const Color primaryDark = Color(0xFF1F6D7E);
+  static const Color lightLabel = Color(0xFFD5F4FB);
+
+  // for the light theme
+  static const Color lightPrimaryBlue = Color(0xFFECF7FA);
+  static const Color lightSecondaryBlue = Color(0xFFC3E9F1);
+  
+}
+
+</code></pre>
+<h3 is-upgraded>Modify the SplashPage class</h3>
+<p>Let&#39;s go to the <strong>SplashPage.dart</strong> file. Start by modifying the color to the parent <strong>Scaffold</strong> widget and adding a <strong>Row</strong> widget to the existing <strong>Center</strong> widget. Remove the <strong>const</strong> from the <strong>Scaffold</strong> since its properties are not hardcoded anymore.</p>
+<pre><code language="language-flutter" class="language-flutter">///... body of the SplashPage
+
+ @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: PersonalPortfolioColors.mainBlue,
+      body: Center(
+        child: Row(
+          children: []
+        )
+      )
+    );
+  }
+
+</code></pre>
+<p>Inside the <strong>Row</strong>, let&#39;s place both the progress indicator and the label. Let&#39;s start with the progress and the icon. We&#39;ll use a <strong>Stack</strong> to overlap them, wrapped inside a <strong>SizedBox</strong> with fixed dimensions (60px) to constrain it:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the Row...
+
+Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    SizedBox(
+        width: 60,
+        height: 60,
+        child: Stack(
+        children: const [
+            Center(
+                child: Icon(
+                    Icons.account_circle, 
+                    color: Colors.white, 
+                    size: 50
+                )
+            ),
+            Center(
+                child: SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.white),
+                    ),
+                ),
+            )
+        ],
+        )
+    ),
+    ]
+)
+
+</code></pre>
+<p>Notice that the <strong>Stack</strong> is stacking our two <strong>Center</strong> widgets wrapping our <strong>Icon</strong> (with the <strong>account_circle</strong>) and the <strong>CircularProgressIndicator</strong>.</p>
+<p>Test it and check it out (you should be getting the spinning and the icon only for now):</p>
+<p class="image-container"><img alt="App" src="img/deb64a7b4552a54a.png"></p>
+<p>Let&#39;s move right along by adding the label next to it with some spacing in between:</p>
+<pre><code language="language-flutter" class="language-flutter">// copy this below the SizedBox, inside the Row
+// ...
+
+const SizedBox(width: 20),
+const Text(&#39;Loading an awesome,\nKick-ass Profile...&#39;,
+    style: TextStyle(color: Colors.white)
+)
+
+</code></pre>
+<p>Your code should look like this at this point:</p>
+<p class="image-container"><img alt="App" src="img/28b6f427cbe3ebee.png"></p>
+<p>Take it for a spin and your splash page layout should be complete:</p>
+<p class="image-container"><img alt="App" src="img/b93ef326b329eb10.png"></p>
+<p>Nice! Oh wait, that page is frozen in time - it doesn&#39;t go anywhere! Wait, wait - we&#39;ll get there. In the next section we&#39;ll tackle simulating a delay and navigating to the next page afterwards.</p>
+<h3 is-upgraded>Simulating a delay / navigating to the main page.</h3>
+<p>Let&#39;s create the hooks for it. First, let&#39;s create a placeholder page for us to go to, which we&#39;ll develop further. Create a file called <strong>portfoliomain_page.dart</strong> and add a class called <strong>PortFolioMainPage</strong> with the following content:</p>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+import &#39;package:roman_web_portfolio/helpers/utils.dart&#39;;
+
+class PortfolioMainPage extends StatelessWidget {
+
+  static const String route = &#39;/main&#39;;
+
+  const PortfolioMainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+     return Scaffold(
+      key: Utils.mainScaffold,
+      body: Container(
+        child: Center(
+          child: Text(&#39;Main Page!&#39;)
+        )
+      )
+     );
+  }
+}
+
+</code></pre>
+<p>Notice the <strong>route</strong> property with the value <code>/main</code> - this is what we&#39;ll use to hook a route to our routing / navigation infrastructure, and the splash will direct the user there after a delay. Let&#39;s go to the <strong>app_routes.dart</strong> file inside the <strong>routes</strong> folder to add this temporary page to navigate to after the splash.</p>
+<p><strong>THIS IS TEMPORARY AND WE WILL CHANGE IT LATER WITH THE NESTED NAVIGATION</strong></p>
+<pre><code language="language-flutter" class="language-flutter">//... in the app_routes.dart file, 
+// inside the &#34;routes&#34; array, under the SplashPage route...
+
+[
+    //...
+    GoRoute(
+        parentNavigatorKey: Utils.mainNav,
+        path: PortfolioMainPage.route,
+        builder: (context, state) =&gt; const PortfolioMainPage(),
+    )
+]
+
+</code></pre>
+<h3 is-upgraded>Implement a delay before navigating away</h3>
+<p>With the route in place, let&#39;s go back to our <strong>SplashPage</strong> page code, and implement the delay.</p>
+<p>Let&#39;s turn the <strong>SplashPage Stateless</strong> widget to a <strong>StatefulWidget</strong> since we need to take advantage of the <strong>initState</strong> lifecycle methods to do some initialization upfront, as well as the <strong>dispose</strong> method to do some clean-up.</p>
+<pre><code language="language-flutter" class="language-flutter">// make it Stateful by creating the StatefulWidget and corresponding State class
+// as usual...
+
+class SplashPage extends StatefulWidget {
+
+  static const String route = &#39;/splash&#39;;
+  const SplashPage({super.key});
+
+  @override
+  State&lt;SplashPage&gt; createState() =&gt; _SplashPageState();
+}
+
+class _SplashPageState extends State&lt;SplashPage&gt; {
+
+    @override
+    Widget build(BuildContext context) {
+        /// rest of the code here
+    }
+}
+
+</code></pre>
+<p><strong>THE REST OF THE CODE WILL FOCUS ON THE STATE PORTION OF THE SPLASHPAGE PAGE WIDGET</strong></p>
+<p>Inside the state <strong>_SplashPageState</strong>, create a property called <strong>delayTimer</strong>, type <strong>Timer</strong> and initialize it as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the _SplashPageState class
+
+Timer delayTimer = Timer(Duration.zero, () {});
+
+</code></pre>
+<p>Override the class&#39;s <strong>initState</strong> method and initialize the <strong>delayTimer</strong> by creating an instance of <strong>Timer</strong>, with a <strong>Duration</strong> of 2 seconds, as such:</p>
+<pre><code language="language-flutter" class="language-flutter"> @override 
+void initState() {
+    super.initState();
+    delayTimer = Timer(const Duration(seconds: 2), () {
+        // rest of the code will go here
+    });
+}
+
+</code></pre>
+<p>The <strong>Timer</strong> will simulate a 2 second delay, after which it will invoke the callback supplied.</p>
+<p>Add the following code inside the callback:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the Timer&#39;s callback 
+
+GoRouter.of(context).go(PortfolioPageMain.route);
+
+</code></pre>
+<p>What this will do is retrieve the <strong>GoRouter</strong> instance using the supplied <strong>BuildContext</strong> context, from which you can invoke one of its methods (in our case, <strong>.go()</strong>), which takes a string parameter - the name of the route to (in our case, the <strong>PortfolioPageMain</strong> page route <code>/main</code>).</p>
+<p>Make sure to dispose of the <strong>Timer</strong> instance by overriding the <strong>dispose</strong> method:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the class, usually at the bottom...
+
+@override
+void dispose() {
+    delayTimer.cancel();
+    super.dispose();
+}
+
+</code></pre>
+<p>Take it for a spin and you should now see it come together: restart the app from the root (&#34;/&#34;), then you&#39;ll see the splash page briefly, followed by a navigation to the main page:</p>
+<p class="image-container"><img alt="App" src="img/bbf4d8604af7f54e.gif"></p>
+<p>Awesome! Splash page is hooked up! Let&#39;s proceed now and build out the shell / skeleton of our nested navigation strategy.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the Nested Navigation Strategy for this app" duration="0">
+        <p>After the splash screen, we want to be able to land on a page that in turn has other sub-pages, so we can toggle them on and off using some common navigation patterns like a navigation rail on the left, and pages swap each other out. How do we accomplish this in Flutter? With <strong>go_router</strong> and the concept of <a href="https://pub.dev/documentation/go_router/latest/go_router/ShellRoute-class.html" target="_blank"><strong>ShellRoutes</strong></a>.</p>
+<p>A <strong>ShellRoute</strong> is a route that displays a UI shell around the matching child route.</p>
+<p>When a ShellRoute is added to the list of routes on GoRouter or GoRoute, a new Navigator that is used to display any matching sub-routes, instead of placing them on the root Navigator.</p>
+<p class="image-container"><img alt="App" src="img/475f20ec8bae84.gif"></p>
+<h2 is-upgraded>Create Placeholder Pages</h2>
+<p>Let&#39;s first go and create the placeholder pages for each of the pages that will constitute our nested navigation: a page for our profile (<strong>WelcomePage</strong>), a page for our social media (<strong>TwitterPage</strong>, <strong>LinkedInPage</strong>), one for a potential web portfolio (<strong>WebPage</strong>) and one for our Github stuff (<strong>GithubPage</strong>).</p>
+<p>*<strong>CREATE ALL THE FOLLOWING PAGES UNDER THE PAGES FOLDER</strong>:</p>
+<h3 is-upgraded>welcome_page.dart</h3>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class WelcomePage extends StatelessWidget {
+
+  static const String route = &#39;/welcome&#39;;
+
+  const WelcomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(&#39;Welcome Page!&#39;)
+    );
+  }
+}
+
+</code></pre>
+<h3 is-upgraded>twitter_page.dart</h3>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class TwitterPage extends StatelessWidget {
+
+  static const String route = &#39;/twitter&#39;;
+
+  const TwitterPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(&#39;Twitter Page!&#39;)
+    );
+  }
+}
+
+</code></pre>
+<h3 is-upgraded>linkedin_page.dart</h3>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class LinkedInPage extends StatelessWidget {
+
+  static const String route = &#39;/linkedin&#39;;
+
+  const LinkedInPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+     return const Center(
+          child: Text(&#39;LinkedIn Page!&#39;)
+     );
+  }
+}
+
+
+</code></pre>
+<h3 is-upgraded>web_page.dart</h3>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class WebPage extends StatelessWidget {
+
+  static const String route = &#39;/webpage&#39;;
+
+  const WebPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(&#39;Web Page!&#39;)
+    );
+  }
+}
+
+</code></pre>
+<h3 is-upgraded>github_page.dart</h3>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class GithubPage extends StatelessWidget {
+
+  static const String route = &#39;/github&#39;;
+
+  const GithubPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(&#39;Github Page!&#39;)
+    );
+  }
+}
+
+</code></pre>
+<p>Your file structure should look like this:</p>
+<p class="image-container"><img alt="App" src="img/a860b9fae36bfda5.png"></p>
+<h2 is-upgraded>Set up the GoRouter nested navigation configuration</h2>
+<p>With all the pages in place, let&#39;s now proceed to create the corresponding configuration for the nested navigation.</p>
+<p>What we want is that when the user navigates to the <strong>main</strong> page after the splash screen, they remain there, while allowing to perform the navigation in place and swap them in and out of the main page. The main page will serve as a &#34;<strong>shell</strong>&#34; so to speak for the rest of the pages to render themselves. They will share the same navigation bar, and the shell just swaps them in and out. This is where the <strong>ShellRoute</strong> comes into play.</p>
+<p>This is a schematic of how it works:</p>
+<p class="image-container"><img alt="App" src="img/a771818eba5e05e.png"></p>
+<p>Let&#39;s build that!</p>
+<p>Let&#39;s refactor the <strong>PortfolioMainPage</strong> which will serve as the &#34;shell&#34; container, through which the pages will be displayed.</p>
+<p>Add a required constructor parameter type <strong>Widget</strong> called <strong>child</strong>. The <strong>GoRouter</strong> navigation framework, upon swapping views due to a navigation request, will inject the corresponding page widget in here.</p>
+<pre><code language="language-flutter" class="language-flutter">//... update the constructor and add
+// the &#39;child&#39; property
+
+final Widget child;
+const PortfolioMainPage({
+    super.key,
+    required this.child  
+});
+
+</code></pre>
+<p>Remove the <strong>Text</strong> widget inside the <strong>Center</strong> widget. Your newly updated <strong>PortfolioMainPage</strong> should look like this:</p>
+<p class="image-container"><img alt="App" src="img/365f30929247e70a.png"></p>
+<p>Now let&#39;s go to the <strong>app_routes.dart</strong> file, and set up the shell route and nested routes.</p>
+<p>Replace the existing <strong>GoRoute</strong> entry for the <strong>PortfolioMainPage</strong> by an instance of the <strong>ShellRoute</strong>:</p>
+<pre><code language="language-flutter" class="language-flutter">//... add this under the existing SplashPageRoute
+
+ShellRoute(
+    navigatorKey: Utils.tabNav,
+    builder: ((context, state, child) {
+       // pages get injected here
+    }),
+    routes: [
+        // all nested routes go here!
+    ]
+)
+
+</code></pre>
+<p>The <strong>ShellRoute</strong> instance will hold all the related sibling routes under the <strong>routes</strong> array, which will get swapped out inside the <strong>PortfolioMainPage</strong> page widget, which serves as their shell. Notice how the <strong>ShellRoute</strong> has its own <strong>navigatorKey</strong> (<strong>tabNav</strong>) we use this when we want to reference the navigation state for all the pages under this nested group. You use the context reference supplied via this global key to point the navigation to this route group whenever someone wants to navigate to any of the pages in the nested routes under it. More on this later.</p>
+<p>The key here is the <strong>builder</strong> callback, which routes the corresponding route&#39;s page widget via the <strong>child</strong> parameter, which in turn gets injected into the shell page (in our case, the <strong>PortfolioMainPage</strong>).</p>
+<p>Go ahead and add this piece of code into the <strong>ShellRoute</strong>&#39;s builder method:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the builder method...
+
+return PortfolioMainPage(child: child);
+
+</code></pre>
+<p>Add a <strong>GoRoute</strong> route instance under the <strong>routes</strong> array, for each of the corresponding child pages:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the routes array...
+
+routes: [
+    GoRoute(
+        parentNavigatorKey: Utils.tabNav,
+        path: WelcomePage.route,
+        pageBuilder: (context, state) {
+            return const NoTransitionPage(
+                child: WelcomePage()
+            );
+        }
+    ),
+    GoRoute(
+        parentNavigatorKey: Utils.tabNav,
+        path: TwitterPage.route,
+        pageBuilder: (context, state) {
+            return const NoTransitionPage(
+                child: TwitterPage()
+            );
+        }
+    ),
+    GoRoute(
+        parentNavigatorKey: Utils.tabNav,
+        path: LinkedInPage.route,
+        pageBuilder: (context, state) {
+            return const NoTransitionPage(
+                child: LinkedInPage()
+            );
+        }
+    ),
+    GoRoute(
+        parentNavigatorKey: Utils.tabNav,
+        path: WebPage.route,
+        pageBuilder: (context, state) {
+            return const NoTransitionPage(
+                child: WebPage()
+            );
+        }
+    ),
+    GoRoute(
+        parentNavigatorKey: Utils.tabNav,
+        path: GithubPage.route,
+        pageBuilder: (context, state) {
+            return const NoTransitionPage(
+                child: GithubPage()
+            );
+        }
+    )
+]
+
+</code></pre>
+<p>Notice a slight change in the <strong>GoRoute</strong> instance this time around: instead of using the <strong>builder</strong> which builds the corresponding page widget and returns it (using the default transition out of the box from GoRouter which is a slide transition), we&#39;re using <strong>pageBuilder</strong>, which is used to customize the transition animation when that route becomes active. In our case we want to override it so as not to perform a slide transition but a &#34;no-transition&#34; animation, hence wrapping our page inside the <strong>NoTransition</strong> page, provided by <strong>go_router</strong>.</p>
+<p>Let&#39;s go back to the <strong>SplashPage</strong> and replace the destination page after the delay.</p>
+<pre><code language="language-flutter" class="language-flutter">// inside the initState, replace the destination page, 
+// and point it to the WelcomePage
+
+delayTimer = Timer(const Duration(seconds: 2), () {
+    GoRouter.of(context).go(WelcomePage.route);
+});
+
+</code></pre>
+<p>Testing the routing (manually for now) it should allow us to navigate to the corresponding pages. Your implementation should look as follows:</p>
+<p class="image-container"><img alt="App" src="img/d7fe8ed3f04071bd.gif"></p>
+<p>Since we don&#39;t want to be navigating these manually, let&#39;s create the navigation rail that will allow us to navigate to each one of these pages programmatically, as well as spruce up our shell page a bit, shall we?</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Develop the PortfolioMainPage (Shell) further" duration="0">
+        <p>We already have a placeholder page for our <strong>PortfolioMainPage</strong>, which is currently displaying each of the corresponding child nested pages.</p>
+<p>But let&#39;s make it more like shell, with regions designated for the corresponding page elements (navigation, body, theme toggle, etc.).</p>
+<p class="image-container"><img alt="App" src="img/e61502ee4a0dab9.png"></p>
+<p>Go to the <strong>PortfolioMainPage</strong> class and let&#39;s do some refactoring. Add a gradient to the <strong>Container</strong> widget in the <strong>body</strong> of the <strong>Scaffold</strong> via its <strong>decoration</strong> property:</p>
+<pre><code language="language-fluter" class="language-fluter">//... inside the Container widget:
+
+decoration: const BoxDecoration(
+    gradient: LinearGradient(
+    colors: [
+        PersonalPortfolioColors.mainBlue,
+        PersonalPortfolioColors.secondaryBlue
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter
+    )
+),
+
+</code></pre>
+<p>The current <strong>child</strong> of the <strong>Container</strong> is a <strong>Center</strong>. Instead, wrap the <strong>Center</strong> inside a <strong>Stack</strong> - we will need it to overlay things on top of it (the theme button):</p>
+<pre><code language="language-flutter" class="language-flutter">//... wrap the existing Container&#39;s child
+// inside a Stack widget
+
+child: Stack(
+    children: [
+        Center(child: widget.child),
+    ]
+)
+
+
+</code></pre>
+<p>Under the <strong>Center</strong> widget, still inside the <strong>Stack</strong>, add a new component (doesn&#39;t exist yet - we&#39;ll create it in a sec) called <strong>LeftNavigation</strong>. Create a file called <strong>left_navigation.dart</strong> inside the <strong>widgets</strong> folder.</p>
+<p>Add the following code for the time being:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the left_navigation.dart in the widgets folder,
+// add the following code:
+
+import &#39;package:flutter/material.dart&#39;;
+
+class LeftNavigation extends StatelessWidget {
+  const LeftNavigation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(&#34;Left nav&#34;)
+    );
+  }
+}
+
+</code></pre>
+<p>With that in place, go back to the <strong>PortfolioMainPage</strong>, and right under the <strong>Center</strong> widget inside the <strong>Stack</strong>, add the newly created <strong>LeftNavigation</strong> widget wrapped inside an <strong>Align</strong> widget - do the proper imports as well:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the Stack, under the current Center:
+
+const Align(
+    alignment: Alignment.centerLeft,
+    child: LeftNavigation(),
+),
+
+</code></pre>
+<p>Your code structure should look like this afterwards:</p>
+<p class="image-container"><img alt="App" src="img/cfec191d26214417.png"></p>
+<p>Take it for a spin and your page should look like this:</p>
+<p class="image-container"><img alt="App" src="img/99ea7c4d6b21f752.png"></p>
+<p>Let&#39;s develop the <strong>LeftNavigation</strong> widget a bit further in the next section. Hit <strong>Next</strong> when ready.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the Navigation Rail (pt.1): Layout" duration="0">
+        <p>The navigation rail will allow us to tap on the corresponding icon that will navigate the user to the desired page.</p>
+<p class="image-container"><img alt="App" src="img/d9917f77b3ff76.gif"></p>
+<p>This is the schematics of what we&#39;ll be tackling for the left navigation:</p>
+<p class="image-container"><img alt="App" src="img/b3e688293fa6f555.png"></p>
+<p>Let&#39;s do it.</p>
+<h2 is-upgraded>Create the LeftNavigationItem model</h2>
+<p>In order to capture the essence of what a single navigation item is, let&#39;s create a PODO class called <strong>LeftNavigationItem</strong> inside the <strong>models</strong> folder, with the following properties:</p>
+<ul>
+<li>icon: holds the corresponding icon illustrating what the page entails</li>
+<li>label: a label associated with the navigation item - will be used later</li>
+<li>route: the name of the page route associated with the corresponding <strong>GoRouter</strong> page; this will come from each corresponding page widget&#39;s <strong>route</strong> property</li>
+<li>isSelected: whether the item is selected or not; this will drive the color change on the icon and label</li>
+</ul>
+<h2 is-upgraded>left_navigation_item.dart</h2>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+
+class LeftNavigationItem {
+  final IconData icon;
+  final String label;
+  final String route;
+  bool isSelected;
+
+  LeftNavigationItem({
+    required this.icon,
+    required this.label,
+    required this.route,
+    this.isSelected = false
+  });
+}
+
+</code></pre>
+<h2 is-upgraded>Populate default items for the navigation</h2>
+<p>In the <strong>Utils</strong> class, create a method called <strong>getDefaultNavigationItems()</strong> which will return our navigation items already populated as required:</p>
+<pre><code language="language-flutter" class="language-flutter">/// inside the Utils.dart class
+
+static List&lt;LeftNavigationItem&gt; getDefaultNavItems() {
+    return [
+        LeftNavigationItem(
+            icon: PersonalPortfolioIcons.user,
+            label: &#39;My Profile&#39;,
+            route: WelcomePage.route
+        ),
+        LeftNavigationItem(
+            icon: PersonalPortfolioIcons.twitter,
+            label: &#39;Twitter&#39;,
+            route: TwitterPage.route
+        ),
+        LeftNavigationItem(
+            icon: PersonalPortfolioIcons.linkedin,
+            label: &#39;LinkedIn&#39;,
+            route: LinkedInPage.route
+        ),
+        LeftNavigationItem(
+            icon: PersonalPortfolioIcons.web,
+            label: &#39;Web&#39;,
+            route: WebPage.route
+        ),
+        LeftNavigationItem(
+            icon: PersonalPortfolioIcons.github,
+            label: &#39;Github&#39;,
+            route: GithubPage.route
+        ),
+    ];
+}
+
+</code></pre>
+<p>With that populated, let&#39;s use this to hydrate our <strong>LeftNavigation</strong> widget.</p>
+<p>In the <strong>LeftNavigation</strong> widget class we created earlier, add the following decoration to the existing <strong>Container</strong> widget, to give it a gradient look in the background, as well as some 20px of padding all around it:</p>
+<pre><code language="language-flutter" class="language-flutter">// ... inside the existing Container:
+
+// return Container(
+    decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.25),
+            Colors.transparent,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter
+        )
+      ),
+      padding: const EdgeInsets.all(20),
+      // child: Text(&#34;Left Nav&#34;)
+
+// )
+</code></pre>
+<p>Replace the existing placeholder <strong>Text</strong> widget by a <strong>Column</strong>:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the Container, as the new child:
+
+    child: Column(
+        children: [],
+    )
+
+///
+
+</code></pre>
+<p>Let&#39;s now populate the <strong>Column</strong>&#39;s <strong><em>children</em></strong> property by feeding into it the list of default items from the <strong>Utils</strong> we created earlier. This is temporary; it&#39;s just to see the navigation come alive.</p>
+<p>Use the <strong>generate</strong> factory method from the <strong>List</strong> class to generate a list of widgets. Inside its corresponding callback method (called once per list item), then return a <strong>Container</strong> widget (for margin), which in turn will wrap an <strong>IconButton</strong> widget, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... populate the &#39;children&#39; property from the Column:
+
+child: Column(
+    children: List.generate(
+        Utils.getDefaultNavItems().length, (index) {
+
+        var navItem = Utils.getDefaultNavItems()[index];
+
+        return Container(
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
+            child: IconButton(
+                iconSize: 30,
+                icon: Icon(
+                    navItem.icon,
+                    color: Colors.white,
+                ),
+                onPressed: () {
+                    // TODO: perform the navigation
+                }
+            ),
+        );
+                
+        }
+    ),
+)
+
+</code></pre>
+<p>Notice how within the iteration, we pull the corresponding <strong>LeftNavigationItem</strong> instance using the supplied <strong>index</strong>, then populate the <strong>IconButton</strong> with the corresponding <strong>icon</strong> property.</p>
+<p>In the <strong>IconButton</strong>&#39;s <strong>onPressed</strong> event, temporarily test whether the icons are responding to the click and whether they can trigger the navigation. This logic is for testing and shouldn&#39;t go in the widget logic, but in the business logic. We&#39;ll move it later. For now, let&#39;s test.</p>
+<p>In the <strong>onPressed</strong> event, add the following:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the onPressed event of the IconButton:
+
+GoRouter.of(context).go(navItem.route);
+
+</code></pre>
+<p>This calls <strong>GoRouter</strong> accessible via the widget&#39;s context, passes the corresponding route value to it, and <strong>GoRouter</strong> interprets the route action and renders the corresponding page accordingly. Neat!</p>
+<p>Running the project at this point should yield the expected results, as shown below:</p>
+<p class="image-container"><img alt="App" src="img/5a2d4da3adb8e0e1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up the Navigation Rail (pt.2): Persist selection using State Management (Provider)" duration="0">
+        <p>You noticed how all navigation items looked white, not selected, right? Also we are hardcoding the items by populating the list of navigation items right inside the widget&#39;s build method. This is bad practice. The best way is to manage this business logic by using a state management strategy.</p>
+<p>I don&#39;t want to make this codelab a <strong>state management</strong> codelab, but there&#39;s a few things to clarify about the topic.</p>
+<p><strong>State management</strong> in Flutter is just how we organize our app to most effectively access state and share it across widgets. State is data that feeds our UI and make it come alive, in our case, the state of the navigation items&#39; selection is the state. Now we need to tell each navigation item to redraw itself based on the change in the state, but we cannot change this data within our widgets since our widgets are rebuilding and widgets are <strong>immutable</strong>, hence the need to &#34;lift the state&#34; out of the widget rebuilding logic into a separate class.</p>
+<p>Let&#39;s use the <a href="https://pub.dev/packages/provider" target="_blank">provider</a> package for it. Read more about state management <a href="https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple" target="_blank">here</a>.</p>
+<h2 is-upgraded>Import the provider package</h2>
+<p>Run the following command to install <strong>provider</strong> in this project:</p>
+<pre><code language="language-flutter" class="language-flutter">flutter pub add provider
+
+</code></pre>
+<p>Inside the <strong>services</strong> folder, create a file called <strong>left_navigation_service.dart</strong> and inside it, a class called <strong>LeftNavigationService</strong> that extends <strong>ChangeNotifier</strong> - this is the premise of the Provider package: you create a class that <strong>notifies</strong> its listeners (in our case, our left navigation widget) when it&#39;s time to rebuild the widgets based on the change in state. In our case, the change in state will be flipping the <strong>isSelected</strong> property from <strong>true</strong> to <strong>false</strong> when the user taps on it.</p>
+<p>Add a property called <strong>items</strong>, type <strong>List&lt;LeftNavigationItem&gt;</strong>, and feed into it the preexisting default navigation items. This will ensure that upon loading this class, it has already the items pre-populated in memory.</p>
+<h2 is-upgraded>left_navigation_service.dart</h2>
+<pre><code language="language-flutter" class="language-flutter">//.. NOTE: do the proper imports!
+
+class LeftNavigationService extends ChangeNotifier {
+
+    List&lt;LeftNavigationItem&gt; navItems = Utils.getDefaultNavItems();
+
+}
+
+</code></pre>
+<p>In the <strong>LeftNavigationService</strong>&#39;s constructor, set the first <strong>LeftNavigationItem</strong> from the list as selected by setting its <strong>isSelected</strong> property to <strong>true</strong>:</p>
+<pre><code language="language-flutter" class="language-flutter">// add this constructor;
+// set the default selected item (the first one):
+
+LeftNavigationService() {
+    navItems.first.isSelected = true;
+}
+
+</code></pre>
+<p>Create a method called <strong>selectNavItem</strong>, which takes an instance of <strong>LeftNavigationItem</strong> - the currently item selected. This will be fed from the UI upon the user clicking on an item.</p>
+<pre><code language="language-flutter" class="language-flutter">// add this method inside the service class
+
+void selectNavItem(LeftNavigationItem item) {
+    for (var element in navItems) {
+      element.isSelected = item == element;
+    }
+
+    GoRouter.of(Utils.tabNav.currentContext!).go(item.route);
+    notifyListeners();
+}
+
+</code></pre>
+<p>Let&#39;s inspect the logic. Right upfront, we loop through all items, and only mark as selected the one that matches the incoming <strong>LeftNavigationItem</strong> instance - the rest we set them to false.</p>
+<p>Notice where we&#39;ve moved the logic to perform the <strong>GoRouter</strong> navigation from the widget to this service. We use the <strong>Utils.tabNav.currentContext</strong> to drive the navigation straight into the group of nested routes referenced by this <strong>navigatorKey</strong>. Then, we pass the corresponding <strong>item.route</strong> value to the <strong>.go()</strong> method, followed by a call to the <strong>notifyListeners</strong> so the listening UI (the <strong>LeftNavigation</strong> widget) knows that it needs to rebuild since there&#39;s been a change in its state, thus reflecting the changes in the UI accordingly.</p>
+<p>Let&#39;s integrate this service to the app from the root so it is accessible to all descendant widgets.</p>
+<h2 is-upgraded>Add a MultiProvider widget and inject the LeftNavigationService</h2>
+<p>At the root of the app, inside the <strong>runApp</strong> method, wrap the existing <strong>PortfolioApp</strong> widget inside a <a href="https://pub.dev/documentation/provider/latest/provider/MultiProvider-class.html" target="_blank"><strong>MultiProvider</strong></a> widget. Inside its <strong>providers</strong> property, add the newly created <strong>LeftNavigationService</strong>, wrapped inside a <strong>ChangeNotifierProvider</strong> which returns it in its <strong>create()</strong> method.</p>
+<p>Replace the current <strong>main</strong> method with the following code:</p>
+<pre><code language="language-flutter" class="language-flutter">// update the main method with the following:
+
+void main() {
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) =&gt; LeftNavigationService(),
+        ),
+      ],
+      child: const PortfolioApp()
+    )
+  );
+}
+
+</code></pre>
+<p>Make sure to do the proper imports. This minimum setup should be enough to inject this service and make it accessible to all descendant widgets, including our <strong>LeftNavigation</strong> widget, which we&#39;ll access in a minute. Now let&#39;s hook this up to the left navigation widget now.</p>
+<p>Back in the <strong>LeftNavigationWidget</strong> class, wrap the existing <strong>Column</strong> widget housing our navigation items inside a <strong>Consumer</strong> widget, of type <strong>LeftNavigationService</strong>. What this will do is create a widget around our <strong>Column</strong> that will listen for every change the <strong>LeftNavigationService</strong> emits, thus causing this portion of the UI to rebuild. It does it once initially, and every time someone calls <strong>notifyListeners</strong> inside the service class.</p>
+<p>Your code should look like this:</p>
+<p class="image-container"><img alt="App" src="img/5a2d4da3adb8e0e1.png"></p>
+<p>Inside the <strong>Consumer</strong> widget, since this code will trigger every time we call <strong>notifyListeners</strong>, let&#39;s then perform the logic to flip the color of the currently selected item from white to a color that goes with our theme.</p>
+<p>Let&#39;s replace the instances of <strong>Utils.getDefaultNavItems</strong> by <strong>navService.navItems</strong> since the items now are coming from our service instead of the <strong>Utils</strong> class:</p>
+<p class="image-container"><img alt="App" src="img/3b2239b285cd2e18.png"></p>
+<p>Go ahead and create a property called <strong>navItemColor</strong> which will hold the logic whether to change it to white or blue depending on whether the item is selected:</p>
+<pre><code language="language-flutter" class="language-flutter">//.. add this under the &#39;navItem&#39; property:
+
+var navItemColor = navItem.isSelected ? 
+                  Colors.white : PersonalPortfolioColors.lightBlue;
+
+</code></pre>
+<p>Once done, feed this property into the <strong>color</strong> property of the <strong>IconButton</strong> widget:</p>
+<p class="image-container"><img alt="App" src="img/9b2ffb8595f37052.png"></p>
+<p>Lastly, replace the navigation trigger to <strong>GoRouter</strong> inside the <strong>IconButton</strong>&#39;s <strong>onPressed</strong> event, by the already provided <strong>selectNavItem</strong> method in the <strong>LeftNavigationService</strong> service, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the &#39;onPressed&#39; event:
+
+navService.selectNavItem(navItem);
+
+</code></pre>
+<p>Remember what this method will do: it will supply the currently selected <strong>LeftNavigationItem</strong> instance, flip it to <strong>true</strong> while the rest to <strong>false</strong>, perform a <strong>GoRouter</strong> navigation using the item&#39;s <strong>route</strong> property, followed by a call to <strong>notifyListeners</strong>, causing this widget to rebuild, reflecting accurately the state of its items.</p>
+<p>Take it for a spin and lets see:</p>
+<p class="image-container"><img alt="App" src="img/8175df47ec1ce8b4.gif"></p>
+<p>That was state management in a nutshell!!!</p>
+<p>With all of the major pieces hooked up, let&#39;s continue setting up our pages; let&#39;s go back to our <strong>WelcomePage</strong> page to personalize it more.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Develop the WelcomePage further" duration="0">
+        <p>Let&#39;s give some love to some of our pages, starting by the welcome page.</p>
+<p class="image-container"><img alt="App" src="img/b09a6a46b61ef461.png"></p>
+<p>Here&#39;s the schematics of what we&#39;ll be building:</p>
+<p class="image-container"><img alt="App" src="img/b4a9cd262181a053.png"></p>
+<p>Back on the <strong>WelcomePage</strong> class, replace the contents of our existing <strong>Container</strong> by a <strong>Column</strong> widget, with its contents vertically and horizontally centered:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the Center widget, add a Column:
+
+Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: []
+)
+
+</code></pre>
+<p><strong>NOTE: ALL CODE BELOW WILL BE INSIDE THE COLUMN ABOVE, SO FOR BREVITY WE WILL OMIT THE COLUMN DEFINITION</strong></p>
+<p>As the first child of the <strong>Column</strong>, add a <strong>Row</strong> widget, which will hold both our image and the waving hand icon.</p>
+<p>Let&#39;s go through the code we will be building:</p>
+<ul>
+<li>The <strong>Row</strong> widget will have its items centered horizontally, occupying the minimum space needed</li>
+<li>As the first child of the <strong>Row</strong>, a <strong>Container</strong> widget with fixed dimensions (100px)</li>
+<li>Some decoration on this <strong>Container</strong> such as an 8px border, light blue, with a 100px border radius to give it its round look. Inside, we use the <strong>image</strong> property to feed it a <strong>NetworkImage</strong> widget, with a <strong>BoxFit.cover</strong> fit so it maintains its aspect ratio. Feel free to use your own image!</li>
+<li>Followed by 20px horizontal spacing</li>
+<li>An <strong>Icon</strong> widget, 90px in side, light blue, with the waving hand - part of our custom icon fonts.</li>
+</ul>
+<p>The code is below, ready to be copied for convenience:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the **Column** widget, as its first child:
+
+Row(
+    mainAxisSize: MainAxisSize.min,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+        Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: PersonalPortfolioColors.mainBlue,
+                width: 8 
+            ),
+            borderRadius: BorderRadius.circular(100),
+            image: const DecorationImage(
+                image: NetworkImage(&#39;https://avatars.githubusercontent.com/u/5081804?s=400&amp;u=04dc8bfa749d69165ab08ffba89edd5f095ba21d&amp;v=4&#39;),
+                fit: BoxFit.cover
+            )
+        ),
+        const SizedBox(width: 20),
+        const Icon(
+            PersonalPortfolioIcons.wave, 
+            size: 90,
+            color: PersonalPortfolioColors.lightBlue
+        )
+    ]
+)
+
+</code></pre>
+<p>Test it, make sure the image and icon display fine:</p>
+<p class="image-container"><img alt="App" src="img/50631349c60a7ed.png"></p>
+<p>Proceed with the second portion of this page, by adding some vertical spacing (20px), followed by a <strong>Column</strong> widget, with its items horizontally center. Start by adding a <strong>Text</strong> widget as the first child of this <strong>Column</strong>.</p>
+<p>The <strong>Text</strong> widget contains the text <code>"Hello,"</code> with some stylings applied.</p>
+<pre><code language="language-flutter" class="language-flutter">//.. under the header content Row widget:
+
+// some spacing:
+const SizedBox(height: 20),
+
+// the column 
+Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+        const Text(&#39;Hello,&#39;, style: 
+            TextStyle(
+              fontSize: 100,
+              fontWeight: FontWeight.bold,
+              color: Colors.white
+            )
+        ),
+    ]
+)
+
+</code></pre>
+<p>Let&#39;s continue adding items, now we&#39;ll add a <strong>Text.rich</strong> widget - which we&#39;re using to mix text styles within the same string. Here we want to show the string <code>"I'm"</code> normal, while the name <code>"Roman"</code> we want it bold. Both of them though should be horizontally centered:</p>
+<pre><code language="language-flutter" class="language-flutter">//... under the &#34;Hello,&#34; Text widget:
+
+const Text.rich(
+    TextSpan(
+    style: TextStyle(fontSize: 100, color: Colors.white),
+    children: [
+            TextSpan(text: &#34;I&#39;m &#34;),
+            TextSpan(
+                text: &#39;Roman&#39;, 
+                style: TextStyle(fontWeight: FontWeight.bold)
+            ),
+        ]
+    ),
+    textAlign: TextAlign.center,
+),
+
+</code></pre>
+<p>Test it out to see the progress:</p>
+<p class="image-container"><img alt="App" src="img/7f163a37c82d8433.png"></p>
+<p>Lastly, we&#39;ll be adding the lower part of this layout, which will be some spacing, and a <strong>Row</strong> widget with a badge icon and a title divided into two lines via another <strong>Column</strong> widget:</p>
+<pre><code language="language-flutter" class="language-flutter">//... right under the **Text.rich** icon:
+
+Row(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+        const Icon(
+            PersonalPortfolioIcons.badge,
+            color: PersonalPortfolioColors.lightBlue,
+            size: 80
+        ),
+        const SizedBox(width: 20),
+        Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+                Text(&#39;Flutter GDE&#39;, textAlign: TextAlign.center, style: TextStyle(fontSize: 40, color: Colors.white)),
+                Text(&#39;Cloud Architect&#39;, textAlign: TextAlign.center, style: TextStyle(fontSize: 40, color: Colors.white)),
+            ],
+        )
+    ]
+)
+
+</code></pre>
+<p>Test it again and you should see the following:</p>
+<p class="image-container"><img alt="App" src="img/3ff5d483b5ed4472.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Make the Welcome Page more dynamic" duration="0">
+        <p>So far the Welcome Page is not that welcoming :(. Our page has a bunch of stuff hardcoded and static - we are not truly leveraging the power of Flutter, which is rendering widgets and making delightful, engaging experiences at 60 frames per second.</p>
+<p>We want to greet our users in many languages, and bring some aspects of dynamism to this page. Let&#39;s use our newly acquired skills in state management so we can flip through a series of greetings and show it to the user.</p>
+<p>We want to invite them in. Let&#39;s also add some animations to it to make it look more inviting. See below what we&#39;ll accomplish:</p>
+<p class="image-container"><img alt="App" src="img/22effc21bebe352.gif"></p>
+<p>Let&#39;s start!</p>
+<h2 is-upgraded>Adding a service for our WelcomePage</h2>
+<p>We&#39;ll proceed by creating a service for the <strong>WelcomePage</strong> page widget so as to maintain its state while the widget rebuilds and becomes more interactive.</p>
+<p>In the <strong>services</strong> folder, add a file called <strong>welcome_page_service.dart</strong> with a class called <strong>WelcomePageService</strong> - extend <strong>ChangeNotifier</strong> so it triggers relevant notifications instructing the welcome page to rebuild its widgets upon state change.</p>
+<p>Add the following properties on it:</p>
+<ul>
+<li>A <strong>String</strong> property called <strong>name</strong> - put your name in here if you want</li>
+<li>Two additional <strong>String</strong> properties (title1, title2) for our titles, or anything you want. In my case, I just don&#39;t want to have anything hardcoded in the UI.</li>
+<li>A <strong>Timer</strong> property called <strong>greetingsTimer</strong>. This will do the periodic switching between the greeting labels every 1 second</li>
+<li>A <strong>List&lt;String&gt;</strong> called <strong>greetings</strong>, containing all our possible greetings</li>
+<li>An <strong>int</strong> property called <strong>greetingsCounter</strong> to keep track of which is the currently greeting being displayed in the array</li>
+<li>A <strong>String</strong> property caled <strong>currentGreeting</strong>, which will display the current greeting in turn in the iteration; defaulting to the first one for now.</li>
+</ul>
+<p>Do the proper imports while you bring the following piece of code into the file:</p>
+<pre><code language="language-flutter" class="language-flutter">class WelcomePageService extends ChangeNotifier {
+
+  String name = &#39;Roman&#39;;
+  String title1 = &#39;Flutter GDE&#39;;
+  String title2 = &#39;Cloud Architect&#39;;
+
+  Timer greetingsTimer = Timer(Duration.zero, () {});
+
+  static List&lt;String&gt; greetings = [
+    &#34;Hello&#34;, &#34;Hola&#34;, &#34;Bonjour&#34;, &#34;Olá&#34;, &#34;Ciao&#34;, &#34;Namaste&#34;, &#34;Kon&#39;nichiwa&#34;
+  ];
+
+  int greetingsCounter = 0;
+  
+  String currentGreeting = greetings[0];
+}
+
+</code></pre>
+<p>Inside this same class, we need to kick off  the cycling of the greeting labels by starting the timer, so let&#39;s create a method called <strong>initializeGreetings</strong>, which will perform the following tasks:</p>
+<ul>
+<li>call <strong>Timer</strong>&#39;s <strong>periodic</strong> method which requires a <strong>Duration</strong> and a callback. The duration will tell the timer how often to call the callback, which in turn does the following: <ul>
+<li>move the counter (greetingsCounter) by one, and when it reaches the length of the greetings list, restarts at zero. On every iteration, the <strong>notifyListeners</strong> call is triggered in order to let the UI know to rebuild itself and show the current greeting (currentGreeting).</li>
+</ul>
+</li>
+</ul>
+<p>Add the following code in the class:</p>
+<pre><code language="language-flutter" class="language-flutter">// ... inside the WelcomePageService class...
+
+void initializeGreetings() {
+
+    // cycle through the list of greetings every second
+    greetingsTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (greetingsCounter == greetings.length) {
+            greetingsCounter = 0;
+        }
+
+        currentGreeting = greetings[greetingsCounter];
+        greetingsCounter++;
+
+        // notify the change to the UI so it rebuilds
+        notifyListeners();
+    });
+}
+
+</code></pre>
+<p>Add an additional method to dispose / cancel the timer when the widget gets disposed. Create a method called <strong>disposeTimer</strong> which all it does is stop the timer by calling <strong>cancel()</strong> on it.</p>
+<pre><code language="language-flutter" class="language-flutter">// ... inside the WelcomePageService class...
+
+void disposeTimer() {
+    greetingsTimer.cancel();
+}
+
+</code></pre>
+<p>In the <strong>WelcomePageService</strong> class, override a <strong>dispose</strong> method, and add the <strong>disposeTimer</strong> call in there. This will ensure that when this service also gets disposed, it also disposes of those dependencies as well:</p>
+<pre><code language="language-flutter" class="language-flutter">@override
+void dispose() {
+    disposeTimer();
+    super.dispose();
+}
+
+</code></pre>
+<p>With this in place, lets go back to the UI to hook up this service to it.</p>
+<h2 is-upgraded>Consume the WelcomePageService in the WelcomePage widget</h2>
+<p>Back in the <strong>WelcomePage</strong> widget, let&#39;s do some refactoring first.</p>
+<p>Turn the <strong>WelcomePage</strong> from a <strong>StatelessWidget</strong> to a <strong>StatefulWidget</strong> since we need to initialize some of the functionality in the lifecycle methods <strong>initState</strong> and <strong>dispose</strong> so lets do it.</p>
+<pre><code language="language-flutter" class="language-flutter">// refactor the class from a StatelessWidget to a StatefulWidget
+
+class WelcomePage extends StatefulWidget {
+  static const String route = &#39;/welcome&#39;;
+
+  const WelcomePage({super.key});
+
+  @override
+  State&lt;WelcomePage&gt; createState() =&gt; _WelcomePageState();
+}
+
+class _WelcomePageState extends State&lt;WelcomePage&gt; {
+
+    //.. rest of the code
+}
+
+</code></pre>
+<p>Now that we have our class turned into a <strong>StatefulWidget</strong>, let&#39;s create a reference of our <strong>WelcomePageService</strong> so we can initialize things on it.</p>
+<p>At the top of the class, create a <strong>late</strong> property type <strong>WelcomePageService</strong> called <strong>serviceInstance</strong>; this will be late initialized and hold the reference to our service for initialization purposes. Do the proper imports as always:</p>
+<pre><code language="language-flutter" class="language-flutter">// at the top of the _WelcomePageState class...
+
+late WelcomePageService serviceInstance;
+
+</code></pre>
+<p>Override the <strong>initState</strong> method in the <strong>_WelcomePageState</strong> state class. Call <strong>super.initState()</strong> as customary and fetch a reference of our service class via the supplied <strong>context</strong> available in the state class. Then, call the method <strong>initializeGreetings()</strong> off of the service instance. You&#39;ll be asked to import the <strong>provider</strong> package here.</p>
+<pre><code language="language-flutter" class="language-flutter">// ... override the initState
+
+@override
+void initState() {
+    super.initState();
+
+    // get a reference of the service using the context
+    serviceInstance = context.read&lt;WelcomePageService&gt;();
+
+    // invoke the initialization of the greetings
+    serviceInstance.initializeGreetings();
+}
+
+</code></pre>
+<p>In the <strong>dispose()</strong> method, stop the timer by using the same reference instance, and calling the method <strong>disposeTimer()</strong> on it, which stops the timer once this widget gets disposed:</p>
+<pre><code language="language-flutter" class="language-flutter">// inside the _WelcomePageState class...
+
+@override
+void dispose() {
+    serviceInstance.disposeTimer();
+    super.dispose();
+}
+
+</code></pre>
+<p>Now let&#39;s consume this service since all the hooks are in place.</p>
+<p>Inside the <strong>build</strong> method, wrap the root <strong>Center</strong> widget inside a <strong>Consumer</strong> widget, type <strong>WelcomePageService</strong>, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">// wrap the Center widget inside a Consumer&lt;WelcomePageService&gt; instance...
+
+return Consumer&lt;WelcomePageService&gt;(
+    builder: (context, welcomeService, child) {
+    return Center(
+        /// ... rest of the code
+    );
+});
+
+</code></pre>
+<p>With that in place, now you can start pulling in the values from the service. Start by replacing the hardcoded string <code>"Hello"</code> by the <strong>currentGreeting</strong> property from the service. Refactor the <strong>Text</strong> widget by not making it <strong>const</strong> but making the text style <strong>const</strong> instead.</p>
+<pre><code language="language-flutter" class="language-flutter">// replace the hardcoded &#34;Hello&#34; by using the currentGreeting property;
+// this will display the current greeting in turn
+
+//... 
+
+Text(welcomeService.currentGreeting, style: 
+    const TextStyle(
+        fontSize: 100,
+        fontWeight: FontWeight.bold,
+        color: Colors.white
+    )
+),
+
+//...
+
+</code></pre>
+<p>Take it for a spin and you should get your cycling greeting labels!!!</p>
+<p>Go ahead and replace the <strong>name</strong>, <strong>title1</strong> and <strong>title2</strong> on your own in the corresponding widgets.</p>
+<h2 is-upgraded>Adding animations to the waving hand</h2>
+<p>Now let&#39;s proceed and add a waving animation to the waving hand icon we have in place. We will perform a swaying animation from side to side, simulating a hand wave.</p>
+<p>Let&#39;s go back to our service class <strong>WelcomePageService</strong> to add the dependencies there.</p>
+<p>In order to have better control of our animations, we will use <strong>Explicit Animations</strong>. You can read more on those <a href="https://docs.flutter.dev/codelabs/explicit-animations" target="_blank">here</a>.</p>
+<p>In a nutshell, <strong>Explicit Animations</strong> are a set of controls for telling Flutter how to rapidly rebuild the widget tree while changing widget properties to create animation effects. This approach enables you to create effects that you can&#39;t achieve using <a href="https://docs.flutter.dev/development/ui/animations/implicit-animations" target="_blank">implicit animations</a>.</p>
+<p>For implementing explicit animations, you need an <a href="https://api.flutter.dev/flutter/animation/AnimationController-class.html" target="_blank"><strong>AnimationController</strong></a> and a <strong>TickerProvider</strong>.</p>
+<p>Start by adding a <strong>late AnimationController</strong> property called <strong>wavingAnimation</strong> to the <strong>WelcomePageService</strong> class:</p>
+<pre><code language="language-flutter" class="language-flutter">/// inside the WelcomePageService class ...
+
+late AnimationController wavingAnimation;
+
+</code></pre>
+<p>Create a method called <strong>initializeAnimation</strong> that takes a <strong>TickerProvider</strong> as a parameter. What this method does is:</p>
+<ul>
+<li>create an instance of <strong>AnimationController</strong>, passing as arguments: <ul>
+<li>A <strong>TickerProvider</strong> (in our case, it will be the <strong>WelcomePageState</strong> itself)</li>
+<li>A <strong>Duration</strong> of 500 milliseconds</li>
+</ul>
+</li>
+<li>on this instance, invoke the <strong>repeat</strong> method so the animation repeats itself until stopped, and setting the argument <strong>reverse</strong> to <strong>true</strong> so when it reaches the end of the first animation cycle, it reverses the animation:</li>
+</ul>
+<pre><code language="language-flutter" class="language-flutter">//... inside the WelcomePageService class...
+
+void initializeAnimation(TickerProvider provider) {
+    wavingAnimation = AnimationController(vsync: provider,
+    duration: const Duration(milliseconds: 500)
+    )..repeat(reverse: true);
+}
+
+</code></pre>
+<p>You cannot forget to dispose of any controllers used in your app, since it may result in memory leaks and unexpected behavior. Create a method called <strong>disposeAnimation</strong> which all it does is dispose of the <strong>AnimationController</strong> instance, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the WelcomePageService class:
+
+void disposeAnimation() {
+    wavingAnimation.dispose();
+}
+
+</code></pre>
+<p>Also in the service class, go to its <strong>dispose()</strong> method and add the <strong>disposeAnimation</strong> invocation there as well:</p>
+<pre><code language="language-flutter" class="language-flutter">// inside the existing **void dispose()** add the disposeAnimation()
+// ADD THIS LINE
+
+disposeAnimation():
+
+</code></pre>
+<p>Let&#39;s go back to our <strong>WelcomePage</strong> widget and wrap things up. Add the <strong>SingleTickerProviderStateMixin</strong> mixin to the existing class, which turns it into a <strong>TickerProvider</strong>.</p>
+<p>Your code should look like this:</p>
+<p class="image-container"><img alt="App" src="img/4aecface601f4cff.png"></p>
+<p>A <a href="https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html" target="_blank"><strong>TickerProvider</strong></a> will provide a <a href="https://api.flutter.dev/flutter/scheduler/Ticker-class.html" target="_blank"><strong>Ticker</strong></a> to the <strong>AnimationController</strong> so we can hook up to Flutter&#39;s frame rendering scheduler, via a mixin called <strong>TickerProviderStateMixin</strong>, allowing the controller to tap into the frame rendering mechanism and make a change to the animation state on every frame rendered, resulting in the simulation of movement.</p>
+<p>In the <strong>initState()</strong>, call the newly added method <strong>initializeAnimation</strong>, passing <strong>this</strong> to it, which will allow to grab a ticker from this instance for tapping into Flutter&#39;s internal frame scheduler, thus performing the animation.</p>
+<pre><code language="language-flutter" class="language-flutter">//.. inside the initState() method, under the
+//.. after getting the serviceInstance reference...
+
+serviceInstance.initializeAnimation(this);
+
+</code></pre>
+<p>Don&#39;t forget to add the <strong>disposeAnimation</strong> invocation also on this widget&#39;s <strong>dispose</strong> method!</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the WelcomePageState&#39;s dispose method,
+// add this before super.dispose()
+
+serviceInstance.disposeAnimation();
+
+</code></pre>
+<p>Now that we have a way to properly initialize the animation and dispose of it; let&#39;s use it.</p>
+<p>Locate the waving hand icon in the widget structure, and wrap it inside a <strong>RotationTransition</strong> explicit animation widget, and provide the required arguments as such:</p>
+<ul>
+<li>alignment: we want this to be a rotation transition, anchored at the bottom center of the widget, therefore set it to <strong>Alignment.bottomCenter</strong></li>
+<li>turns: a <strong>Tween</strong> animation type <strong>double</strong>, that starts at -0.09 of a unit, ending at 0.005 of a unit. A unit is the width of the widget being animated. To the <strong>animate</strong> method, pass a <strong>CurvedAnimation</strong>, feeding into it our <strong>AnimationController</strong> being referenced through our service instance <strong>welcomeService</strong> provided by the <strong>Consumer</strong> widget.</li>
+</ul>
+<p>Grab the whole code below and replace the existing <strong>Icon</strong> widget, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">// replace the Icon widget with this:
+
+RotationTransition(
+    alignment: Alignment.bottomCenter,
+    turns: Tween&lt;double&gt;(begin: -0.09, end: 0.005)
+        .animate(CurvedAnimation(parent: welcomeService.wavingAnimation, curve: Curves.easeInOut)),
+    
+    child: const Icon(PersonalPortfolioIcons.wave, size: 90, color:             PersonalPortfolioColors.lightBlue),
+)
+
+</code></pre>
+<p>One minor tweak - add more spacing to the left of this <strong>RotationTransition</strong> by increasing the <strong>SizedBox</strong> from 20px to 40px, which will give the waving animation a bit of room to breathe:</p>
+<pre><code language="language-flutter" class="language-flutter">//... to the SizedBox next to the RotationTransition:
+
+const SizedBox(width: 40),
+
+</code></pre>
+<p>And voilá! We&#39;ve got a pretty decent welcome page, with animations and dynamic content being displayed! We rock!</p>
+<p class="image-container"><img alt="App" src="img/22effc21bebe352.gif"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Bonus: Set up the rest of the pages" duration="0">
+        <p>So far we&#39;ve only developed fully the <strong>WelcomePage</strong> widget. In order to keep things cohesive, let&#39;s further develop the rest of the pages.</p>
+<p>We&#39;ll keep things simple for now - each page will just show its corresponding icon, a title and a subtitle. Feel free to improve on the layout and content of each one of the pages.</p>
+<p>We&#39;ll use the following structure on each of the pages (<strong>TwitterPage</strong>, <strong>LinkedInPage</strong>, <strong>GithubPage</strong>, and <strong>WebPage</strong>):</p>
+<ul>
+<li>We&#39;ll add two <strong>String</strong> local properties (<code>mainTitle</code>, <code>subTitle</code>) for feeding the <strong>Text</strong> widgets, and an <strong>IconData</strong> property called <strong>icon</strong> for the corresponding icon</li>
+<li>The <strong>Center</strong> widget will wrap a <strong>Column</strong> widget, with its items centered both horizontally and vertically</li>
+<li>As the first child of the <strong>Column</strong> widget, add the corresponding icon, with a 80px size and light blue</li>
+<li>Right under, add a <strong>Text</strong> widget, centered horizontally, bold, 100px and white. Here you can add any content corresponding for each page</li>
+<li>Lastly, another <strong>Text</strong> widget - this will serve as a subtitle. Add a 40px font size, light blue with normal text.</li>
+</ul>
+<p>You can check out the widget structure content below; as a challenge, go ahead and complete the other pages adding the corresponding content:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the build method of each of the pages...
+
+var mainTitle = &#39;Your main title&#39;;
+var subTitle = &#39;Your subtitle&#39;;
+IconData icon = Icons.abc; // Add the icon from the PersonalPortfolioIcons mapping
+
+return Center(
+    child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+            Icon(icon, size: 80,
+            color: PersonalPortfolioColors.lightBlue),
+            Text(mainTitle,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 100,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                )
+            ),
+            Text(subTitle, style: 
+                const TextStyle(
+                    fontSize: 40,
+                    color: PersonalPortfolioColors.lightBlue
+                )
+            ),
+        ],
+    )
+);
+
+</code></pre>
+<h2 is-upgraded>Challenge: Populate the rest of the pages</h2>
+<p>As a challenge, let&#39;s see if you&#39;ve picked up a thing or two from this session, therefore we&#39;ll request from you the following:</p>
+<ul>
+<li>Populate the rest of the pages with the widget structure above</li>
+<li>For each of the corresponding pages, add a <strong>mainTitle</strong>, <strong>subTitle</strong> and <strong>icon</strong> and see if you can get it to work so it looks like below:</li>
+</ul>
+<p class="image-container"><img alt="App" src="img/afd5545d07559d9e.gif"></p>
+<ul>
+<li>For the Twitter Page:<ul>
+<li>mainTitle: &#34;Follow Me&#34;</li>
+<li>subTitle: &#34;drcoderz&#34;</li>
+<li>icon: PersonalPortfolioIcons.twitter</li>
+</ul>
+</li>
+<li>For the LinkedIn Page:<ul>
+<li>mainTitle: &#34;Let&#39;s\nConnect&#34;</li>
+<li>subTitle: &#34;on LinkedIn&#34;</li>
+<li>icon: PersonalPortfolioIcons.linkedIn</li>
+</ul>
+</li>
+<li>For the Web Page:<ul>
+<li>mainTitle: &#34;Visit\nMy Page!&#34;</li>
+<li>subTitle: &#34;romanjustcodes.web.app&#34;</li>
+<li>icon: PersonalPortfolioIcons.web</li>
+</ul>
+</li>
+<li>For the GitHub Page:<ul>
+<li>mainTitle: &#34;Check out\nMy Repos&#34;</li>
+<li>subTitle: &#34;on Github&#34;</li>
+<li>icon: PersonalPortfolioIcons.github</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>Good Luck!</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Challenge: Add the services to the rest of the pages" duration="0">
+        <p>If you completed the bonus section before, you may have noticed the content in those pages is still hardcoded inside the page widget, which is a bad practice unless that&#39;s your intention.</p>
+<p>The correct approach is to move the content that feeds these widgets to a separate service or view model using some sort of state management approach - we&#39;ve been using Provider, so you could follow the same approach we did earlier: create a service class inside the <strong>services</strong> folder and feed it at the top of the widget structure via the <strong>MultiProvider</strong> widget.</p>
+<p>I&#39;ll do the first one, you do the rest - deal?</p>
+<p>Let&#39;s do the <strong>TwitterPageService</strong> service. Create a file called <strong>twitter_page_service.dart</strong> and inside, a class called <strong>TwitterPageService</strong>. Since this class will not be publishing updates to its state but merely hold the state for our page, no need extending <strong>ChangeNotifier</strong>.</p>
+<h2 is-upgraded>twitter_page_service.dart</h2>
+<pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
+import &#39;package:roman_web_portfolio/helpers/personal_portfolio_icons_icons.dart&#39;;
+
+class TwitterPageService {
+
+  String mainTitle = &#34;Follow me&#34;;
+  String subTitle = &#34;@drcoderz&#34;;
+  IconData icon = PersonalPortfolioIcons.twitter;
+}
+
+
+</code></pre>
+<p>Next, register this service at the root of the project, in the <strong>main</strong> method&#39;s <strong>runApp</strong> method, right inside the <strong>MultiProvider</strong>. Add an additional provider wrapper (<strong>Provider</strong>) that returns our newly created provided service <strong>TwitterPageService</strong>, as such:</p>
+<h2 is-upgraded>NOTE: Do the proper imports!</h2>
+<pre><code language="language-flutter" class="language-flutter">//... inside the **providers** array of the MultiProvider, add:
+
+Provider(
+    create: (_) =&gt; TwitterPageService(),
+),
+
+</code></pre>
+<p>With that set, go to the <strong>TwitterPage</strong> widget, and inside the <strong>build</strong> method, as the first line of the method, fetch an instance of this service via its <strong>context</strong>, using the <strong>read()</strong> method, which traverses up the widget hierarchy until it finds an instance of <strong>TwitterPageService</strong>. Store the fetched instance in a local property called <strong>twitterPageService</strong>.</p>
+<p>Follow this call by populating the corresponding existing properties, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... inside the TwitterPage&#39;s build method:
+
+var twitterPageService = context.read&lt;TwitterPageService&gt;();
+
+var mainTitle = twitterPageService.mainTitle;
+var subTitle = twitterPageService.subTitle;
+IconData icon = twitterPageService.icon;
+
+
+</code></pre>
+<p>Run the app again - you shouldn&#39;t notice any changes - but you know it is correctly built now; without hardcoded values in the UI! With this, you&#39;ve future-proofed your application and made it highly maintainable.</p>
+<p>Go ahead and do this for the rest of the pages - good luck!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Wrap-up" duration="0">
+        <p>In this codelab, we accomplished the following:</p>
+<ul>
+<li>Set up a Flutter Project with a basic project structure</li>
+<li>Installing custom fonts and icon fonts</li>
+<li>Set up a navigation strategy using GoRouter</li>
+<li>Creating Flutter layouts</li>
+<li>Implement a state management strategy using Provider</li>
+<li>Implement explicit animations</li>
+</ul>
+<p>In the next codelab, we&#39;ll implement persistence of state in local storage using the shared_preferences package from Flutter.</p>
+<h2 is-upgraded>Please don&#39;t forget to follow me on social media:</h2>
+<ul>
+<li>On Twitter (<a href="https://www.twitter.com/drcoderz" target="_blank">@drcoderz</a>)</li>
+<li>On YouTube (<a href="https://www.youtube.com/channel/UCKsp3r1ERjCpKJtD2n5WtPg" target="_blank">Roman Just Codes</a>)</li>
+<li>On my <a href="https://romanjustcodes.web.app/" target="_blank">Personal Portfolio</a></li>
+<li>On <a href="https://medium.com/@romanejaquez" target="_blank">Medium</a></li>
+<li>On <a href="https://www.linkedin.com/in/roman-jaquez-8941a424/" target="_blank">LinkedIn</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Complete Code" duration="0">
+        <p>The complete code is available on Github by following this <a href="https://github.com/romanejaquez/flutter-forward-codelab1.git" target="_blank">link</a>.</p>
+<h2 is-upgraded>Happy Coding!!!</h2>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements-tmp/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements-tmp/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements-tmp/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements-tmp/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
