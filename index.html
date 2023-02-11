@@ -200,9 +200,10 @@ import &#39;package:roman_web_portfolio/pages/splash_page.dart&#39;;
     
       <google-codelab-step label="Installing Custom Fonts" duration="0">
         <p>We&#39;ll be using our own custom font throughout the app as opposed to the ones that come out of the box, as well as install our own icon font - a way to display vector-based images from a font file.</p>
-<p><a href="https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fflutterweb_fonts.zip?alt=media&token=e9782732-639d-4519-b05b-ad61d8d20406" target="_blank"><strong>Download</strong></a> these font files (Product Sans family) and add the <strong>Product Sans .ttf</strong> fonts inside the <strong>assets/fonts</strong> folder we created earlier.</p>
+<p>Download the font files (both Product Sans and the icon fonts) available on <a href="https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fflutterweb_fonts.zip?alt=media&token=e9782732-639d-4519-b05b-ad61d8d20406" target="_blank"><strong>this link</strong></a>.</p>
+<p>Unzip the package and drag all the fonts (all <strong>.ttf</strong> files available: <strong>Product Sans Bold.ttf</strong>, <strong>Product Sans Italic.ttf</strong>, <strong>Product Sans Regular.ttf</strong> and <strong>PersonalPortfolioIcons.ttf</strong>) and add them inside the <strong>assets/fonts</strong> folder we created earlier.</p>
 <p>Your structure should look like this:</p>
-<p class="image-container"><img alt="App" src="img/c23f3d4c672a8c01.png"></p>
+<p class="image-container"><img alt="App" src="img/6ffcde43c93b8e3d.png"></p>
 <h2 is-upgraded>Configure the fonts on the app</h2>
 <p>Navigate to the <strong>pubspec.yaml</strong> and paste the following config section at the root of the indentation (also you can find a commented section that can guide you on that) - make sure the indentations are correct!:</p>
 <pre><code language="language-yaml" class="language-yaml">fonts:
@@ -213,13 +214,14 @@ import &#39;package:roman_web_portfolio/pages/splash_page.dart&#39;;
           weight: 900
         - asset: assets/fonts/Product Sans Italic.ttf
           style: italic
+    - family: PersonalPortfolioIcons
+      fonts:
+        - asset: assets/fonts/PersonalPortfolioIcons.ttf
 
 </code></pre>
-<p class="image-container"><img alt="App" src="img/f937fee979844b6e.png"></p>
 <p>Notice how we defined the font family as <strong>Product Sans</strong> - we&#39;ll use that name in a minute.</p>
-<p>Rebuild the app by shutting it down and restarting it again so it picks up the newly added files.</p>
 <h2 is-upgraded>Apply the font family to the app</h2>
-<p>With the fonts imported, let&#39;s apply them to the app. Navigate to the <strong>main.dart</strong>, and inside our <strong>MaterialApp</strong> widget, set its <strong>theme</strong> property to a <strong>ThemeData</strong> instance, with its <strong>fontFamily</strong> property set to the number we defined our font to be (&#34;Product Sans&#34;). The new updated <strong>MaterialApp</strong> widget will look like this:</p>
+<p>With the fonts imported, let&#39;s apply them to the app. Navigate to the <strong>main.dart</strong>, and inside our <strong>MaterialApp</strong> widget, set its <strong>theme</strong> property to a <strong>ThemeData</strong> instance, with its <strong>fontFamily</strong> property set to the name we defined our font to be (&#34;Product Sans&#34;). The new updated <strong>MaterialApp</strong> widget will look like this:</p>
 <pre><code language="language-flutter" class="language-flutter">//.. rest of the code
 
 return MaterialApp(
@@ -232,30 +234,29 @@ return MaterialApp(
 );
 
 </code></pre>
+<h2 is-upgraded>NOTE: Rebuild the app by shutting it down and restarting it again so it picks up the newly added files.</h2>
 <p>Run the app again (<code>flutter run -d chrome</code>) and check the fonts got applied:</p>
 <p class="image-container"><img alt="App" src="img/aa47718eeef0078f.png"></p>
-<p>Great. Now let&#39;s install the icon fonts, which will pretty much follow the same procedure.</p>
-<p><a href="https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fflutterweb_fonts.zip?alt=media&token=e9782732-639d-4519-b05b-ad61d8d20406" target="_blank"><strong>Download</strong></a> these fonts which were created using (fluttericon)[https://www.fluttericon.com/] but you can use any icon-generating tool that generates a TTF with your icons. The cool thing about <strong>FlutterIcon</strong> is that it generates a <strong>.dart</strong> file already setup with corresponding Dart properties mapped to each of the icon fonts on your file.</p>
-<p>In this package you&#39;ll get a few files that we&#39;ll use for this app:</p>
+<h2 is-upgraded>Apply the Icon Fonts</h2>
+<p>Great. Now let&#39;s apply the icon fonts; half of the work is done since we imported the icon font file in the <strong>assets/fonts</strong> folder in the previous step (the file called <strong>PersonalPortfolioIcons.ttf</strong>). We build it using a tool called <strong>FlutterIcon</strong> available at this <a href="https://www.fluttericon.com/" target="_blank"><strong>link</strong></a>.</p>
+<p>The cool thing about <strong>FlutterIcon</strong> is that it generates a <strong>.dart</strong> file already setup with corresponding Dart properties mapped to each of the icon fonts on your file.</p>
+<p>In the package we downloaded earlier, aside from the <strong>.ttf</strong> files, there is another important file:</p>
 <ul>
-<li>A <strong>.ttf</strong> file called <strong>PersonalPortfolioIcons.ttf</strong> corresponding to the font itself</li>
 <li>A <strong>.dart</strong> class, called <strong>personal_portfolio_icons_icons.dart</strong> with the font mappings.</li>
 </ul>
-<p>Drag the <strong>.ttf</strong> files inside the <strong>assets/fonts</strong> folder and the <strong>.dart</strong> file in the <strong>helpers</strong> folder, as such:</p>
-<p class="image-container"><img alt="App" src="img/aa47718eeef0078f.png"></p>
-<p>Back on the <strong>pubspec.yaml</strong> file, add an entry to the newly imported font, above or below the exising configuration for Product Sans:</p>
-<pre><code language="language-flutter" class="language-flutter">//... under fonts...
+<p>Drag the <strong>personal_portfolio_icons_icons.dart</strong> file inside the <strong>lib/helpers</strong> folder of the project.</p>
+<p>Your structure then should look like this:</p>
+<p class="image-container"><img alt="App" src="img/559ac33fdc24a7e7.png"></p>
+<p>Let&#39;s test that the icon fonts are functional. In the <strong>SplashPage</strong> widget, replace the <strong>Text</strong> widget inside the <strong>Center</strong> widget by an <strong>Icon</strong> widget, adding one of the existing icon mappings (try the <strong>PersonalPortfolioIcons.wave</strong> - the waving hand icon), as such: (keep in mind to import the icon mapping class in this file!)</p>
+<pre><code language="language-flutter" class="language-flutter">// ... inside the SplashPage class, replace the line that says:
+// Text(&#39;Hello, Flutter!&#39;) by the following line:
 
-  fonts:
-    - family: PersonalPortfolioIcons
-      fonts:
-        - asset: assets/fonts/PersonalPortfolioIcons.ttf
+Icon(PersonalPortfolioIcons.wave)
 
 </code></pre>
-<p class="image-container"><img alt="App" src="img/cc24a508ddea43fd.png"></p>
-<p>Keep this exact configuration so it can work.</p>
-<p>Rebuild the app by restarting and launching it again for the font changes to take effect.</p>
-<p>Let&#39;s test that the icon fonts are functional. In the <strong>SplashPage</strong> widget, replace the <strong>Text</strong> widget by an <strong>Icon</strong> widget, adding one of the existing icon mappings, as such:</p>
+<p>Your class will look like this after the change:</p>
+<p class="image-container"><img alt="App" src="img/4f63ffa6efc98c8d.png"></p>
+<p>Rebuild the app and reload the browser, you should be able to see a waving hand icon, as such:</p>
 <p class="image-container"><img alt="App" src="img/8d24def53a33673d.png"></p>
 <p>And we&#39;re all set to continue. Hit <strong>Next</strong> to proceed.</p>
 
@@ -274,7 +275,8 @@ return MaterialApp(
 <p>The package we&#39;ll use is <a href="https://pub.dev/packages/go_router" target="_blank">Go_Router</a> supported by the Flutter team at Google, which is a declarative routing package for Flutter that uses the Router API to provide a convenient, url-based API for navigating between different screens. You can define URL patterns, navigate using a URL, handle deep links, and a number of other navigation-related scenarios.</p>
 <p>Following that declarative aspect, we&#39;ll go ahead and create a file that will encapsulate the routes.</p>
 <p>Start by creating a utilities class that will hold some unique keys that our navigation will require so we can refer to it programmamtically throughout the app.</p>
-<p>Create a file called <strong>Utils</strong> in the <strong>helpers</strong> folder. This class will contain three important <strong>Global</strong> keys. <a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html#:~:text=Global%20keys%20provide%20access%20to,another%20location%20in%20the%20tree." target="_blank">Global keys</a> are used to uniquely identify elements in the widget tree, whcih provide you access to their state, therefore we&#39;ll use them to refer to the navigation and the main scaffold on this app.</p>
+<p>Create a file called <strong>utils.dart</strong> in the <strong>lib/helpers</strong> folder. This class will contain three important <strong>Global</strong> keys. <a href="https://api.flutter.dev/flutter/widgets/GlobalKey-class.html#:~:text=Global%20keys%20provide%20access%20to,another%20location%20in%20the%20tree." target="_blank">Global keys</a> are used to uniquely identify elements in the widget tree, whcih provide you access to their state, therefore we&#39;ll use them to refer to the navigation and the main scaffold on this app.</p>
+<h2 is-upgraded>utils.dart</h2>
 <pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
 
 class Utils {
@@ -289,7 +291,7 @@ class Utils {
 <pre><code language="language-flutter" class="language-flutter">flutter pub add go_router
 
 </code></pre>
-<p>Create a file called <strong>app_routes.dart</strong> inside the <strong>routes</strong> folder, and add the initial configuration for our application navigation route strategy, as follows:</p>
+<p>Create a file called <strong>app_routes.dart</strong> inside the <strong>lib/routes</strong> folder, and add the initial configuration for our application navigation route strategy, as follows:</p>
 <pre><code language="language-flutter" class="language-flutter">import &#39;package:go_router/go_router.dart&#39;;
 import &#39;package:roman_web_portfolio/helpers/utils.dart&#39;;
 import &#39;package:roman_web_portfolio/pages/splash_page.dart&#39;;
@@ -376,7 +378,7 @@ static const String route = &#39;/splash&#39;;
 <h2 is-upgraded>Add Color definitions for this app</h2>
 <p>Before we start, let&#39;s add some foundational elements we&#39;ll need for this app, such as color definitions.</p>
 <h3 is-upgraded>Add Colors</h3>
-<p>Add a file called <strong>colors.dart</strong> inside the <strong>helpers</strong> folder and a class with the name <strong>PersonalPortfolioColors</strong>, which will be a list of colors we&#39;ll use throughout our app. Feel free to change it to yours. Some of these will be the foundation of the <strong>theming</strong> we&#39;ll be implementing later. Grab the content from the snippet below:</p>
+<p>Add a file called <strong>colors.dart</strong> inside the <strong>lib/helpers</strong> folder and a class with the name <strong>PersonalPortfolioColors</strong>, which will be a list of colors we&#39;ll use throughout our app. Feel free to change it to yours. Some of these will be the foundation of the <strong>theming</strong> we&#39;ll be implementing later. Grab the content from the snippet below:</p>
 <pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
 
 class PersonalPortfolioColors {
@@ -397,7 +399,7 @@ class PersonalPortfolioColors {
 
 </code></pre>
 <h3 is-upgraded>Modify the SplashPage class</h3>
-<p>Let&#39;s go to the <strong>SplashPage.dart</strong> file. Start by modifying the color to the parent <strong>Scaffold</strong> widget and adding a <strong>Row</strong> widget to the existing <strong>Center</strong> widget. Remove the <strong>const</strong> from the <strong>Scaffold</strong> since its properties are not hardcoded anymore.</p>
+<p>Let&#39;s go to the <strong>splash_page.dart</strong> file. Start by modifying the color to the parent <strong>Scaffold</strong> widget and adding a <strong>Row</strong> widget to the existing <strong>Center</strong> widget, with a <strong>MainAxisSize.min</strong> as its <strong>mainAxisSize</strong>. Remove the <strong>const</strong> from the <strong>Scaffold</strong> since its properties are not hardcoded anymore. Import the <strong>colors.dart</strong> from your own project as well:</p>
 <pre><code language="language-flutter" class="language-flutter">///... body of the SplashPage
 
  @override
@@ -406,7 +408,12 @@ class PersonalPortfolioColors {
       backgroundColor: PersonalPortfolioColors.mainBlue,
       body: Center(
         child: Row(
-          children: []
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            // ... REST OF THE CODE WILL GO HERE!
+
+          ]
         )
       )
     );
@@ -414,54 +421,49 @@ class PersonalPortfolioColors {
 
 </code></pre>
 <p>Inside the <strong>Row</strong>, let&#39;s place both the progress indicator and the label. Let&#39;s start with the progress and the icon. We&#39;ll use a <strong>Stack</strong> to overlap them, wrapped inside a <strong>SizedBox</strong> with fixed dimensions (60px) to constrain it:</p>
-<pre><code language="language-flutter" class="language-flutter">//... inside the Row...
+<pre><code language="language-flutter" class="language-flutter">//... inside the Row&#39;s children array:
 
-Row(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-    SizedBox(
-        width: 60,
-        height: 60,
-        child: Stack(
-        children: const [
-            Center(
-                child: Icon(
-                    Icons.account_circle, 
-                    color: Colors.white, 
-                    size: 50
-                )
-            ),
-            Center(
-                child: SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                    ),
-                ),
+
+SizedBox(
+  width: 60,
+  height: 60,
+  child: Stack(
+    children: const [
+        Center(
+            child: Icon(
+                Icons.account_circle, 
+                color: Colors.white, 
+                size: 50
             )
-        ],
+        ),
+        Center(
+            child: SizedBox(
+                width: 60,
+                height: 60,
+                child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.white),
+                ),
+            ),
         )
-    ),
-    ]
-)
+    ],
+  )
+),
 
 </code></pre>
 <p>Notice that the <strong>Stack</strong> is stacking our two <strong>Center</strong> widgets wrapping our <strong>Icon</strong> (with the <strong>account_circle</strong>) and the <strong>CircularProgressIndicator</strong>.</p>
 <p>Test it and check it out (you should be getting the spinning and the icon only for now):</p>
 <p class="image-container"><img alt="App" src="img/deb64a7b4552a54a.png"></p>
 <p>Let&#39;s move right along by adding the label next to it with some spacing in between:</p>
-<pre><code language="language-flutter" class="language-flutter">// copy this below the existing SizedBox containing the image
-// inside the Row, as the second and third child...
+<pre><code language="language-flutter" class="language-flutter">// copy this right under the existing SizedBox containing the image
 
 const SizedBox(width: 20),
 const Text(&#39;Loading an awesome,\nKick-ass Profile...&#39;,
     style: TextStyle(color: Colors.white)
-)
+),
 
 </code></pre>
 <p>Your code should look like this at this point:</p>
-<p class="image-container"><img alt="App" src="img/28b6f427cbe3ebee.png"></p>
+<p class="image-container"><img alt="App" src="img/d1f7dd2bc11f3bb6.png"></p>
 <p>Take it for a spin and your splash page layout should be complete:</p>
 <p class="image-container"><img alt="App" src="img/b93ef326b329eb10.png"></p>
 <p>Nice! Oh wait, that page is frozen in time - it doesn&#39;t go anywhere! Wait, wait - we&#39;ll get there. In the next section we&#39;ll tackle simulating a delay and navigating to the next page afterwards.</p>
@@ -495,14 +497,11 @@ class PortfolioMainPage extends StatelessWidget {
 <pre><code language="language-flutter" class="language-flutter">//... in the app_routes.dart file, 
 // inside the &#34;routes&#34; array, under the SplashPage route...
 
-[
-    //...
-    GoRoute(
-        parentNavigatorKey: Utils.mainNav,
-        path: PortfolioMainPage.route,
-        builder: (context, state) =&gt; const PortfolioMainPage(),
-    )
-]
+GoRoute(
+    parentNavigatorKey: Utils.mainNav,
+    path: PortfolioMainPage.route,
+    builder: (context, state) =&gt; const PortfolioMainPage(),
+)
 
 </code></pre>
 <h3 is-upgraded>Implement a delay before navigating away</h3>
@@ -541,7 +540,7 @@ Timer delayTimer = Timer(Duration.zero, () {});
 void initState() {
     super.initState();
     delayTimer = Timer(const Duration(seconds: 2), () {
-        // rest of the code will go here
+        // rest of the code will go inside this callback
     });
 }
 
@@ -951,7 +950,7 @@ static List&lt;LeftNavigationItem&gt; getDefaultNavItems() {
 ///
 
 </code></pre>
-<p>Let&#39;s now populate the <strong>Column</strong>&#39;s <strong><em>children</em></strong> property by feeding into it the list of default items from the <strong>Utils</strong> we created earlier. This is temporary; it&#39;s just to see the navigation come alive.</p>
+<p>Let&#39;s now populate the <strong>Column</strong>&#39;s <strong><em>children</em></strong> property by feeding into it the list of default items from the <strong>Utils</strong> class we created earlier. This is temporary; it&#39;s just to see the navigation come alive.</p>
 <p>Use the <strong>generate</strong> factory method from the <strong>List</strong> class to generate a list of widgets. Inside its corresponding callback method (called once per list item), then return a <strong>Container</strong> widget (for margin), which in turn will wrap an <strong>IconButton</strong> widget, as such:</p>
 <pre><code language="language-flutter" class="language-flutter">//... populate the &#39;children&#39; property from the Column:
 
@@ -990,7 +989,7 @@ GoRouter.of(context).go(navItem.route);
 </code></pre>
 <p>This calls <strong>GoRouter</strong> accessible via the widget&#39;s context, passes the corresponding route value to it, and <strong>GoRouter</strong> interprets the route action and renders the corresponding page accordingly. Neat!</p>
 <p>Running the project at this point should yield the expected results, as shown below:</p>
-<p class="image-container"><img alt="App" src="img/5a2d4da3adb8e0e1.png"></p>
+<p class="image-container"><img alt="App" src="img/80581e97473c1e84.gif"></p>
 
 
       </google-codelab-step>
