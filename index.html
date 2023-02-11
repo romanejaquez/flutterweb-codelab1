@@ -578,7 +578,7 @@ void dispose() {
 <p class="image-container"><img alt="App" src="img/475f20ec8bae84.gif"></p>
 <h2 is-upgraded>Create Placeholder Pages</h2>
 <p>Let&#39;s first go and create the placeholder pages for each of the pages that will constitute our nested navigation: a page for our profile (<strong>WelcomePage</strong>), a page for our social media (<strong>TwitterPage</strong>, <strong>LinkedInPage</strong>), one for a potential web portfolio (<strong>WebPage</strong>) and one for our Github stuff (<strong>GithubPage</strong>).</p>
-<p>*<strong>CREATE ALL THE FOLLOWING PAGES UNDER THE PAGES FOLDER</strong>:</p>
+<p><strong>CREATE ALL THE FOLLOWING PAGES UNDER THE PAGES FOLDER</strong>:</p>
 <h3 is-upgraded>welcome_page.dart</h3>
 <pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
 
@@ -694,7 +694,9 @@ const PortfolioMainPage({
 <p class="image-container"><img alt="App" src="img/365f30929247e70a.png"></p>
 <p>Now let&#39;s go to the <strong>app_routes.dart</strong> file, and set up the shell route and nested routes.</p>
 <p>Replace the existing <strong>GoRoute</strong> entry for the <strong>PortfolioMainPage</strong> by an instance of the <strong>ShellRoute</strong>:</p>
-<pre><code language="language-flutter" class="language-flutter">//... add this under the existing SplashPageRoute
+<pre><code language="language-flutter" class="language-flutter">// add this under the existing SplashPageRoute by 
+// replacing the existing GoRoute entry for the PortfolioMainPage
+// by the following code:
 
 ShellRoute(
     navigatorKey: Utils.tabNav,
