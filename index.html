@@ -130,7 +130,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Create your First Page" duration="0">
+      <google-codelab-step label="Create your First Page: The Splash Page" duration="0">
         <p>Let&#39;s start building some confidence before we get deeper. Let&#39;s create our first page, which will be a splash screen, where we&#39;ll simulate a delay before proceeding further into the app.</p>
 <p>Inside the <strong>pages</strong> folder, add a new file called <strong>splash_page.dart</strong>. Add the following contents:</p>
 <pre><code language="language-flutter" class="language-flutter">import &#39;package:flutter/material.dart&#39;;
@@ -451,8 +451,8 @@ Row(
 <p>Test it and check it out (you should be getting the spinning and the icon only for now):</p>
 <p class="image-container"><img alt="App" src="img/deb64a7b4552a54a.png"></p>
 <p>Let&#39;s move right along by adding the label next to it with some spacing in between:</p>
-<pre><code language="language-flutter" class="language-flutter">// copy this below the SizedBox, inside the Row
-// ...
+<pre><code language="language-flutter" class="language-flutter">// copy this below the existing SizedBox containing the image
+// inside the Row, as the second and third child...
 
 const SizedBox(width: 20),
 const Text(&#39;Loading an awesome,\nKick-ass Profile...&#39;,
