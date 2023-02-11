@@ -946,7 +946,7 @@ static List&lt;LeftNavigationItem&gt; getDefaultNavItems() {
 
     child: Column(
         children: [],
-    )
+    ),
 
 ///
 
@@ -977,7 +977,7 @@ child: Column(
                 
         }
     ),
-)
+),
 
 </code></pre>
 <p>Notice how within the iteration, we pull the corresponding <strong>LeftNavigationItem</strong> instance using the supplied <strong>index</strong>, then populate the <strong>IconButton</strong> with the corresponding <strong>icon</strong> property.</p>
@@ -1137,6 +1137,7 @@ Row(
                 image: NetworkImage(&#39;https://avatars.githubusercontent.com/u/5081804?s=400&amp;u=04dc8bfa749d69165ab08ffba89edd5f095ba21d&amp;v=4&#39;),
                 fit: BoxFit.cover
             )
+          ),
         ),
         const SizedBox(width: 20),
         const Icon(
@@ -1145,7 +1146,7 @@ Row(
             color: PersonalPortfolioColors.lightBlue
         )
     ]
-)
+),
 
 </code></pre>
 <p>Test it, make sure the image and icon display fine:</p>
@@ -1170,7 +1171,7 @@ Column(
             )
         ),
     ]
-)
+),
 
 </code></pre>
 <p>Let&#39;s continue adding items, now we&#39;ll add a <strong>Text.rich</strong> widget - which we&#39;re using to mix text styles within the same string. Here we want to show the string <code>"I'm"</code> normal, while the name <code>"Roman"</code> we want it bold. Both of them though should be horizontally centered:</p>
@@ -1217,7 +1218,7 @@ Row(
             ],
         )
     ]
-)
+),
 
 </code></pre>
 <p>Test it again and you should see the following:</p>
@@ -1468,7 +1469,7 @@ RotationTransition(
         .animate(CurvedAnimation(parent: welcomeService.wavingAnimation, curve: Curves.easeInOut)),
     
     child: const Icon(PersonalPortfolioIcons.wave, size: 90, color:             PersonalPortfolioColors.lightBlue),
-)
+),
 
 </code></pre>
 <p>One minor tweak - add more spacing to the left of this <strong>RotationTransition</strong> by increasing the <strong>SizedBox</strong> from 20px to 40px, which will give the waving animation a bit of room to breathe:</p>
