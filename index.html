@@ -1306,6 +1306,18 @@ void dispose() {
 }
 
 </code></pre>
+<h2 is-upgraded>Inject the WelcomePageService at the root of the app: MultiProvider</h2>
+<p>Before we can start consuming the newly created <strong>WelcomePageService</strong> we must inject it at the root of the app, via the <strong>MultiProvider</strong> by adding it to its list of providers.</p>
+<p>Go to the <strong>main.dart</strong> file, and inside the <strong>runApp</strong> method, add the <strong>WelcomePageService</strong> as one of the services to be injected and accessible by all inherited widgets, as such:</p>
+<pre><code language="language-flutter" class="language-flutter">//... add this as the last item in the list of Providers in the MultiProvider widget:
+
+ChangeNotifierProvider(
+  create: (_) =&gt; WelcomePageService(),
+),
+
+</code></pre>
+<p>Your code should look like this after adding the <strong>WelcomePageService</strong> as a <strong>ChangeNotifierProvider</strong> provided service:</p>
+<p class="image-container"><img alt="App" src="img/bfcf6472a9c2c917.png"></p>
 <p>With this in place, lets go back to the UI to hook up this service to it.</p>
 <h2 is-upgraded>Consume the WelcomePageService in the WelcomePage widget</h2>
 <p>Back in the <strong>WelcomePage</strong> widget, let&#39;s do some refactoring first.</p>
