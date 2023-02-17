@@ -34,3 +34,13 @@ The following screenshot depicts what we'll be building throughout this series:
 - Stores the last selected option
 
 ![App](https://firebasestorage.googleapis.com/v0/b/romanjustcodes.appspot.com/o/flutterweb_codelabs%2Fimg_initial.gif?alt=media&token=f424bc95-3cb5-4650-8e7d-7f83f0f8a0f4)
+
+[Full Code](https://github.com/romanejaquez/flutter-forward-portfolio.git) - still in progress. 
+
+### Please don't forget to follow me on social media:
+
+- On Twitter ([@drcoderz](https://www.twitter.com/drcoderz))
+- On YouTube ([Roman Just Codes](https://www.youtube.com/channel/UCKsp3r1ERjCpKJtD2n5WtPg))
+- On my [Personal Portfolio](https://romanjustcodes.web.app/)
+- On [Medium](https://medium.com/@romanejaquez)
+- On [LinkedIn](https://www.linkedin.com/in/roman-jaquez-8941a424/)
